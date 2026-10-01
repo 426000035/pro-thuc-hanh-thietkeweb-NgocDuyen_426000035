@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Áo thun cotton basic - Chi tiết sản phẩm</title>
+  <link rel="stylesheet" href="product.css">
+</head>
+<body>
+
+  <div class="product-page">
+
+    <!-- Khu vực ảnh sản phẩm (60%) -->
+    <section class="gallery" aria-label="Ảnh sản phẩm">
+      <div class="gallery-main">Ảnh chính</div>
+      <div class="gallery-thumbs">
+        <button type="button" class="thumb" aria-label="Ảnh 1">1</button>
+        <button type="button" class="thumb" aria-label="Ảnh 2">2</button>
+        <button type="button" class="thumb" aria-label="Ảnh 3">3</button>
+        <button type="button" class="thumb" aria-label="Ảnh 4">4</button>
+      </div>
+    </section>
+
+    <!-- Khu vực thông tin mua hàng (40%) -->
+    <section class="buy-box" aria-label="Thông tin mua hàng">
+      <h1 class="product-title">Áo thun cotton basic</h1>
+      <p class="product-price">
+        <span class="price-now">249.000đ</span>
+        <span class="price-old">320.000đ</span>
+      </p>
+      <p class="product-desc">
+        Chất liệu cotton 100% mềm mại, thấm hút mồ hôi tốt, form regular dễ phối đồ.
+      </p>
+
+      <!-- Chọn size -->
+      <fieldset class="option">
+        <legend>Kích cỡ</legend>
+        <div class="option-list">
+          <label class="size-option">
+            <input type="radio" name="size" value="S" checked>
+            <span>S</span>
+          </label>
+          <label class="size-option">
+            <input type="radio" name="size" value="M">
+            <span>M</span>
+          </label>
+          <label class="size-option">
+            <input type="radio" name="size" value="L">
+            <span>L</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- Chọn màu -->
+      <fieldset class="option">
+        <legend>Màu sắc</legend>
+        <div class="option-list">
+          <label class="color-option" title="Đen">
+            <input type="radio" name="color" value="den" checked>
+            <span style="--swatch:#1b1f24"></span>
+          </label>
+          <label class="color-option" title="Trắng">
+            <input type="radio" name="color" value="trang">
+            <span style="--swatch:#ffffff"></span>
+          </label>
+          <label class="color-option" title="Xanh navy">
+            <input type="radio" name="color" value="navy">
+            <span style="--swatch:#25406b"></span>
+          </label>
+          <label class="color-option" title="Đỏ đô">
+            <input type="radio" name="color" value="do">
+            <span style="--swatch:#9b2c3a"></span>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- Số lượng -->
+      <div class="option">
+        <span class="option-label">Số lượng</span>
+        <div class="qty">
+          <button type="button" class="qty-btn" id="qty-minus" aria-label="Giảm số lượng">−</button>
+          <input type="text" id="qty-input" class="qty-input" value="1" inputmode="numeric" aria-label="Số lượng">
+          <button type="button" class="qty-btn" id="qty-plus" aria-label="Tăng số lượng">+</button>
+        </div>
+      </div>
+
+      <!-- Nút mua -->
+      <div class="cta">
+        <button type="button" class="btn btn-outline">Thêm vào giỏ</button>
+        <button type="button" class="btn btn-primary">Mua ngay</button>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Tăng/giảm số lượng (tối thiểu 1, tối đa 99)
+    const input = document.getElementById("qty-input");
+    const clamp = (n) => Math.min(99, Math.max(1, n || 1));
+
+    document.getElementById("qty-minus").addEventListener("click", () => {
+      input.value = clamp(parseInt(input.value, 10) - 1);
+    });
+    document.getElementById("qty-plus").addEventListener("click", () => {
+      input.value = clamp(parseInt(input.value, 10) + 1);
+    });
+    input.addEventListener("change", () => {
+      input.value = clamp(parseInt(input.value, 10));
+    });
+  </script>
+
+</body>
+</html>

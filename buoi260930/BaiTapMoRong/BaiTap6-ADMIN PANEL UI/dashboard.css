@@ -1,0 +1,267 @@
+/* ===== Thiết lập chung ===== */
+:root {
+  --sidebar-w: 240px;
+  --ink: #1c2430;
+  --muted: #647085;
+  --line: #e1e6ee;
+  --bg: #f3f5f9;
+  --panel: #ffffff;
+  --side-bg: #17202e;
+  --side-text: #b8c2d3;
+  --accent: #2563eb;
+  --green: #15803d;
+  --red: #b91c1c;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ===== Sidebar cố định bên trái =====
+   position: fixed + top/bottom/left: 0 → luôn dính vào khung nhìn,
+   không bị cuộn theo trang. overflow-y: auto phòng khi menu dài. */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-w);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
+  background: var(--side-bg);
+  color: var(--side-text);
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.brand {
+  padding: 0 12px 24px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.brand span {
+  color: #60a5fa;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-list a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-list a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.nav-list a.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.nav-list a:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+.sidebar-footer {
+  margin-top: auto; /* đẩy xuống đáy sidebar */
+  padding: 16px 12px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.9rem;
+}
+
+/* ===== Vùng nội dung bên phải =====
+   margin-left bằng đúng chiều rộng sidebar để không bị che.
+   min-height + nội dung dài → trang cuộn, sidebar vẫn đứng yên. */
+.content {
+  margin-left: var(--sidebar-w);
+  min-height: 100vh;
+  padding: 32px;
+}
+
+.page-head {
+  margin-bottom: 24px;
+}
+
+.page-head h1 {
+  font-size: 1.7rem;
+}
+
+.page-head p {
+  color: var(--muted);
+}
+
+/* ===== 4 thẻ thống kê: CSS Grid ===== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.card {
+  padding: 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.card h2 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.card .value {
+  margin: 6px 0 4px;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.trend {
+  font-size: 0.85rem;
+}
+
+.trend.up {
+  color: var(--green);
+}
+
+.trend.down {
+  color: var(--red);
+}
+
+/* ===== Bảng dữ liệu: chiếm toàn bộ chiều ngang vùng nội dung ===== */
+.table-box {
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table-box h2 {
+  padding: 18px 20px;
+  font-size: 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Màn hình hẹp: bảng cuộn ngang trong khung, không làm vỡ bố cục */
+.table-scroll {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.data-table th,
+.data-table td {
+  padding: 14px 20px;
+  white-space: nowrap;
+}
+
+.data-table thead th {
+  background: #f8fafc;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid var(--line);
+  transition: background 0.15s;
+}
+
+.data-table tbody tr:last-child {
+  border-bottom: 0;
+}
+
+.data-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* Nhãn trạng thái */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badge.done   { background: #dcfce7; color: #166534; }
+.badge.ship   { background: #dbeafe; color: #1e40af; }
+.badge.wait   { background: #fef3c7; color: #92400e; }
+.badge.cancel { background: #fee2e2; color: #991b1b; }
+
+/* ===== Responsive ===== */
+@media (max-width: 1100px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --sidebar-w: 72px;
+  }
+  .sidebar {
+    padding: 16px 8px;
+  }
+  .brand {
+    padding: 0 0 16px;
+    font-size: 0.95rem;
+    text-align: center;
+  }
+  .nav-list a {
+    padding: 10px 4px;
+    font-size: 0.7rem;
+    text-align: center;
+  }
+  .sidebar-footer {
+    font-size: 0.7rem;
+    text-align: center;
+    padding-inline: 0;
+  }
+  .content {
+    padding: 20px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}
