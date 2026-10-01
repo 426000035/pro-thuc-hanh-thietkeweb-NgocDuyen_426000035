@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Áp dụng CSS Grid cho container */
+.container {
+    display: grid;
+    /* Cột trái 200px, nội dung chính chiếm phần còn lại, cột phải 200px */
+    grid-template-columns: 200px 1fr 200px;
+    /* Dòng đầu (header) và cuối (footer) cao tự động, dòng giữa chiếm toàn bộ không gian còn lại */
+    grid-template-rows: auto 1fr auto;
+    /* Định vị 5 phần tử bằng grid-template-areas */
+    grid-template-areas:
+        "header header header"
+        "sidebar-left main sidebar-right"
+        "footer footer footer";
+    min-height: 100vh;
+}
+
+/* Định vị các khu vực cụ thể */
+.header {
+    grid-area: header;
+    background-color: #2c3e50;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+
+.sidebar-left {
+    grid-area: sidebar-left;
+    background-color: #34495e;
+    color: #ffffff;
+    padding: 20px;
+}
+
+.sidebar-left ul {
+    list-style: none;
+    padding-top: 10px;
+}
+
+.sidebar-left ul li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    display: block;
+    padding: 8px 0;
+}
+
+.sidebar-left ul li a:hover {
+    text-decoration: underline;
+    color: #3498db;
+}
+
+.main-content {
+    grid-area: main;
+    background-color: #ffffff;
+    padding: 30px;
+}
+
+.main-content h2 {
+    margin-bottom: 15px;
+}
+
+.main-content p {
+    margin-bottom: 15px;
+}
+
+.sidebar-right {
+    grid-area: sidebar-right;
+    background-color: #34495e;
+    color: #ffffff;
+    padding: 20px;
+}
+
+.ad-placeholder {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    padding: 40px 20px;
+    margin-top: 15px;
+    text-align: center;
+    border: 2px dashed #bdc3c7;
+}
+
+.footer {
+    grid-area: footer;
+    background-color: #2c3e50;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Reponsive Design cho các thiết bị di động (Tùy chọn) */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr auto auto;
+        grid-template-areas:
+            "header"
+            "sidebar-left"
+            "main"
+            "sidebar-right"
+            "footer";
+    }
+}
