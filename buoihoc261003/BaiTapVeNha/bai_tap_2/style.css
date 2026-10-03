@@ -1,0 +1,250 @@
+:root {
+  --bg: #1c1410;
+  --surface: #2a1f19;
+  --text: #f5ebe0;
+  --muted: #c9b8a8;
+  --accent: #b45309;
+  --gold: #fcd34d;
+
+  --card-w: 280px;
+  --card-h: 400px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(180, 83, 9, 0.3), transparent 55%),
+    var(--bg);
+  line-height: 1.5;
+}
+
+/* ============ BỐ CỤC TRANG ============ */
+.team {
+  width: min(92%, 1000px);
+  margin: 0 auto;
+  padding: 64px 0;
+}
+
+.team__head {
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.team__tag {
+  margin: 0 0 8px;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.team__head h1 {
+  margin: 0 0 12px;
+  font-size: clamp(26px, 5vw, 40px);
+  line-height: 1.2;
+}
+
+.team__hint {
+  margin: 0;
+  color: var(--muted);
+}
+
+.team__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+}
+
+/* ============ THẺ LẬT 3D ============ */
+/* .card tạo chiều sâu 3D và nhận hover, bản thân nó KHÔNG xoay,
+   nên vùng hover luôn ổn định, không bị nhấp nháy ở mép thẻ */
+.card {
+  width: var(--card-w);
+  height: var(--card-h);
+  perspective: 1000px;
+  outline: none;
+}
+
+/* .card__inner là phần xoay thật sự */
+.card__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+/* Lật 180 độ khi hover, hoặc khi focus (bàn phím, chạm trên điện thoại) */
+.card:hover .card__inner,
+.card:focus .card__inner,
+.card:focus-within .card__inner {
+  transform: rotateY(180deg);
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 6px;
+  border-radius: 24px;
+}
+
+/* ============ HAI MẶT CỦA THẺ ============ */
+.face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 22px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  /* Ẩn mặt đang quay lưng lại phía người xem */
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.face--back {
+  justify-content: center;
+  background:
+    linear-gradient(160deg, rgba(180, 83, 9, 0.35), transparent 60%),
+    var(--surface);
+  /* Mặt sau xoay sẵn 180 độ, khi thẻ lật thì nó quay về hướng người xem */
+  transform: rotateY(180deg);
+}
+
+/* ============ MẶT TRƯỚC ============ */
+.avatar {
+  width: 148px;
+  height: 148px;
+  margin-bottom: 18px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 4px solid var(--gold);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.avatar svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.name {
+  margin: 0 0 2px;
+  font-size: 21px;
+}
+
+.role {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--gold);
+}
+
+.bio {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.flip-hint {
+  margin-top: auto;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  opacity: 0.8;
+}
+
+/* ============ MẶT SAU ============ */
+.face--back .name {
+  color: var(--gold);
+}
+
+.quote {
+  margin: 8px 0 18px;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.contact {
+  width: 100%;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  font-size: 14px;
+}
+
+.contact li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.contact li:last-child {
+  border-bottom: none;
+}
+
+.contact a {
+  color: var(--text);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.contact a:hover {
+  color: var(--gold);
+  text-decoration: underline;
+}
+
+/* Nút Gọi ngay: dùng lại hiệu ứng hover nâng 3px */
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 28px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  background: var(--accent);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* ============ TRUY CẬP: GIẢM CHUYỂN ĐỘNG ============ */
+@media (prefers-reduced-motion: reduce) {
+  .card__inner,
+  .btn {
+    transition: none;
+  }
+
+  .btn:hover {
+    transform: none;
+  }
+}

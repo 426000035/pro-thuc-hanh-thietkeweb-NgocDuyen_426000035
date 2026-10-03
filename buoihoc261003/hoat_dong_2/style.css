@@ -1,0 +1,76 @@
+:root {
+  --purple: #8b5cf6;
+  --pink: #ec4899;
+  --blue: #3b82f6;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #0f172a;
+  font-family: system-ui, sans-serif;
+}
+
+.loader {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Vòng tròn nhỏ gọn 22px, viền gradient tím - hồng - xanh */
+.loader__ring {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    var(--purple) 30%,
+    var(--pink) 60%,
+    var(--blue) 100%
+  );
+  /* Khoét rỗng phần giữa để chỉ còn lại viền dày 3px */
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px));
+          mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px));
+  animation: spin 0.9s linear infinite;
+}
+
+/* Chữ Loading với màu gradient cùng tông */
+.loader__text {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, var(--purple), var(--pink), var(--blue));
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+}
+
+/* Ba dấu chấm nhấp nháy sau chữ */
+.loader__text::after {
+  content: "";
+  display: inline-block;
+  width: 1.2em;
+  text-align: left;
+  animation: dots 1.4s steps(4, end) infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes dots {
+  0%   { content: ""; }
+  25%  { content: "."; }
+  50%  { content: ".."; }
+  75%  { content: "..."; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader__ring { animation-duration: 3s; }
+  .loader__text::after { animation: none; content: "..."; }
+}

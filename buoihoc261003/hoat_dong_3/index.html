@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AOS Scroll Animation</title>
+
+  <!-- 1. CSS của AOS (đặt TRƯỚC style.css của bạn) -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Cuộn xuống để xem hiệu ứng</h1>
+    <p>↓</p>
+  </header>
+
+  <section class="section section--purple" data-aos="fade-up">
+    <h2>Giới thiệu</h2>
+    <p>Section này hiện ra từ dưới lên (fade-up).</p>
+  </section>
+
+  <section class="section section--pink" data-aos="fade-right">
+    <h2>Dịch vụ</h2>
+    <p>Section này trượt vào từ bên trái (fade-right).</p>
+  </section>
+
+  <section class="section section--blue" data-aos="zoom-in" data-aos-delay="100">
+    <h2>Sản phẩm</h2>
+    <p>Section này phóng to dần (zoom-in), trễ 100ms.</p>
+  </section>
+
+  <section class="section section--dark" data-aos="flip-left" data-aos-duration="1200">
+    <h2>Liên hệ</h2>
+    <p>Section này lật vào (flip-left), kéo dài 1200ms.</p>
+  </section>
+
+  <!-- 2. JS của AOS (đặt cuối body) -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- 3. Khởi tạo AOS -->
+  <script>
+    AOS.init({
+      duration: 800,     // thời gian chạy hiệu ứng (ms)
+      easing: 'ease-out-cubic',
+      once: true,        // chỉ chạy 1 lần, không lặp khi cuộn ngược lên
+      offset: 120,       // cuộn cách mép dưới màn hình 120px thì kích hoạt
+      disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    });
+  </script>
+</body>
+</html>

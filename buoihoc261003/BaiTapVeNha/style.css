@@ -1,0 +1,268 @@
+:root {
+  --bg: #1a1218;
+  --surface: #261b24;
+  --text: #f8eee6;
+  --muted: #cdb9c4;
+  --accent: #c2410c;
+  --gold: #fcd34d;
+  --purple: #8b5cf6;
+  --pink: #ec4899;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  overflow: hidden;            /* khung .world mới là nơi cuộn */
+  font-family: system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+
+/* ============ PARALLAX NHIỀU LỚP (CỐT LÕI) ============ */
+/* Khung cuộn + perspective: 1px. Lớp nào lùi xa (translateZ âm) sẽ cuộn chậm hơn */
+.world {
+  height: 100vh;
+  height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: 1px;
+  scroll-behavior: smooth;
+}
+
+.group {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.group--hero {
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* Mỗi lớp khai báo hệ số --s. Lùi xa (1 - s) px thì bị nhỏ đi,
+   nên phóng lại s lần để vẫn phủ kín. Tốc độ cuộn = 1 / s */
+.layer {
+  position: absolute;
+  inset: 0;
+  transform-origin: center;
+  transform: translateZ(calc((1 - var(--s, 1)) * 1px)) scale(var(--s, 1));
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/* Lớp phóng to s lần nên chỉ phần giữa của ảnh hiện ra lúc đầu,
+   phần còn lại lộ dần khi cuộn */
+
+/* ---- Lớp 1: bầu trời bình minh + mặt trời + sao (s=3, tốc độ 33%) ---- */
+.layer--sky {
+  --s: 3;
+  background-image:
+    radial-gradient(circle 24px at 60% 44%, #fff7d6 0 97%, transparent 100%),
+    radial-gradient(circle 150px at 60% 44%, rgba(255, 243, 196, 0.85), rgba(255, 243, 196, 0)),
+    radial-gradient(circle 1.5px at 42% 34.5%, #fff 60%, transparent),
+    radial-gradient(circle 1.5px at 50% 35.5%, #fff 60%, transparent),
+    radial-gradient(circle 1.5px at 56% 34%, #fff 60%, transparent),
+    linear-gradient(to bottom, #1e1b4b 0%, #4c1d95 28%, #7e2a8c 34%, #be3a86 38%, #f97316 43%, #fcd34d 48%, #fde68a 55%, #fde68a 100%);
+}
+
+/* ---- Lớp 2: dãy núi xa (s=2, tốc độ 50%) ---- */
+.layer--far {
+  --s: 2;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000' preserveAspectRatio='none'><defs><linearGradient id='a' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23b0709a'/><stop offset='.45' stop-color='%236b4469'/></linearGradient></defs><path fill='url(%23a)' d='M0 600L150 540L300 590L480 480L650 570L820 510L1000 580L1180 490L1350 570L1480 530L1600 590V1000H0Z'/></svg>");
+}
+
+/* ---- Lớp 3: đồi cà phê gần, có luống cây (s=1.5, tốc độ 67%) ---- */
+.layer--mid {
+  --s: 1.5;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000' preserveAspectRatio='none'><path fill='%23553a5c' d='M0 640Q250 540 520 620T1050 600T1600 590V1000H0Z'/><g fill='none' stroke='%236e8f4e' stroke-width='6' stroke-dasharray='10 14' stroke-linecap='round' opacity='.65'><path d='M0 720Q300 640 600 710T1200 690T1600 670'/><path d='M0 790Q300 710 600 780T1200 760T1600 740'/></g></svg>");
+}
+
+/* ---- Lớp 4: luống cây sát phía trước (s=1.2, tốc độ 83%) ---- */
+.layer--near {
+  --s: 1.2;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000' preserveAspectRatio='none'><path fill='%232f2030' d='M0 840Q300 760 650 830T1300 810T1600 780V1000H0Z'/><g fill='%23241826'><circle cx='200' cy='815' r='26'/><circle cx='238' cy='824' r='20'/><circle cx='620' cy='830' r='28'/><circle cx='660' cy='838' r='20'/><circle cx='980' cy='818' r='26'/><circle cx='1020' cy='826' r='20'/><circle cx='1360' cy='800' r='28'/></g><g fill='%23ef4444'><circle cx='195' cy='812' r='3'/><circle cx='622' cy='826' r='3'/><circle cx='982' cy='815' r='3'/><circle cx='1362' cy='797' r='3'/></g><g fill='none' stroke='%234d7c3f' stroke-width='7' stroke-dasharray='12 16' stroke-linecap='round'><path d='M0 905Q400 840 800 900T1600 870'/><path d='M0 960Q400 895 800 955T1600 925'/></g></svg>");
+}
+
+/* ---- Lớp chữ: nằm ở z=0, cuộn đúng tốc độ ---- */
+.layer--base {
+  --s: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 max(24px, 6vw) 22vh;
+}
+
+.hero__inner {
+  max-width: 580px;
+  text-shadow: 0 2px 18px rgba(20, 10, 30, 0.65);
+}
+
+.tag {
+  margin: 0 0 8px;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.hero__inner h1 {
+  margin: 0 0 14px;
+  font-size: clamp(34px, 7vw, 68px);
+  line-height: 1.1;
+}
+
+.hl {
+  background: linear-gradient(90deg, var(--gold), var(--pink), var(--purple));
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+  text-shadow: none;
+}
+
+.desc {
+  margin: 0 0 28px;
+  font-size: 18px;
+}
+
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: none;
+  transform: translateX(-50%);
+  animation: bounce 1.6s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50%      { transform: translate(-50%, 6px); }
+}
+
+/* ============ NÚT (HOVER NÂNG 3PX) ============ */
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+  background: var(--accent);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* ============ NỘI DUNG THƯỜNG ============ */
+/* position: relative + nền đặc để nằm đè lên các lớp parallax phía trước */
+.section {
+  position: relative;
+  padding: 80px max(24px, 6vw);
+  text-align: center;
+  background: var(--bg);
+}
+
+.section h2 {
+  margin: 0 0 8px;
+  font-size: clamp(26px, 5vw, 40px);
+}
+
+.sub {
+  max-width: 520px;
+  margin: 0 auto 40px;
+  color: var(--muted);
+}
+
+.speeds {
+  display: grid;
+  gap: 14px;
+  width: min(100%, 720px);
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.speeds li {
+  display: grid;
+  grid-template-columns: minmax(130px, 1fr) 2fr 48px;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+}
+
+.speeds b {
+  text-align: right;
+  color: var(--gold);
+}
+
+.bar {
+  position: relative;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.bar::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--v);
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--purple), var(--pink));
+}
+
+.footer {
+  position: relative;
+  padding: 32px 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  background: #120c10;
+}
+
+.footer p { margin: 0 0 4px; }
+
+/* ============ DỰ PHÒNG: ĐIỆN THOẠI & GIẢM CHUYỂN ĐỘNG ============ */
+/* Bỏ perspective, giữ nguyên bố cục (scale) nhưng các lớp cuộn cùng tốc độ */
+@media (hover: none), (max-width: 768px), (prefers-reduced-motion: reduce) {
+  .world { perspective: none; }
+  .layer { transform: scale(var(--s, 1)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .world { scroll-behavior: auto; }
+  .scroll-hint { animation: none; }
+  .btn { transition: none; }
+  .btn:hover { transform: none; }
+}
+
+@media (max-width: 560px) {
+  .speeds li { grid-template-columns: 1fr 48px; }
+  .speeds .bar { grid-column: 1 / -1; grid-row: 2; }
+}

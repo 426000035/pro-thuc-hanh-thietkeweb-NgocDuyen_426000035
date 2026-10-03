@@ -1,0 +1,255 @@
+:root {
+  --bg: #1a1218;
+  --surface: #261b24;
+  --text: #f8eee6;
+  --muted: #cdb9c4;
+  --accent: #c2410c;
+  --gold: #fcd34d;
+  --purple: #8b5cf6;
+  --pink: #ec4899;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+
+/* ============ PARALLAX (CỐT LÕI) ============ */
+/* fixed: ảnh nền neo vào khung nhìn, nội dung cuộn trôi qua phía trên,
+   nên mắt thấy ảnh nền di chuyển chậm hơn nội dung */
+.parallax {
+  position: relative;
+  background-color: var(--bg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+/* Lớp phủ giúp chữ luôn dễ đọc */
+.parallax::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(26, 18, 24, 0.8), rgba(26, 18, 24, 0.15));
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  padding: 64px max(24px, 6vw);
+}
+
+.banner__content {
+  position: relative;
+  z-index: 1;
+  max-width: 580px;
+}
+
+/* ---- Ảnh 1: bình minh trên đồi cà phê (SVG nhúng) ---- */
+.banner--sunrise {
+  min-height: 100vh;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000'><defs><linearGradient id='sky' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%231e1b4b'/><stop offset='.45' stop-color='%23be3a86'/><stop offset='.75' stop-color='%23f59e0b'/><stop offset='1' stop-color='%23fde68a'/></linearGradient><radialGradient id='glow' cx='.5' cy='.58' r='.45'><stop offset='0' stop-color='%23fff3c4' stop-opacity='.9'/><stop offset='1' stop-color='%23fff3c4' stop-opacity='0'/></radialGradient></defs><rect width='1600' height='1000' fill='url(%23sky)'/><rect width='1600' height='1000' fill='url(%23glow)'/><g fill='%23fff' opacity='.7'><circle cx='180' cy='120' r='2.5'/><circle cx='420' cy='70' r='2'/><circle cx='700' cy='140' r='2.5'/><circle cx='1020' cy='60' r='2'/><circle cx='1300' cy='130' r='2.5'/><circle cx='1500' cy='80' r='2'/></g><circle cx='800' cy='560' r='120' fill='%23fff7d6'/><g fill='none' stroke='%23311a2b' stroke-width='5' stroke-linecap='round' opacity='.7'><path d='M1050 300q15-18 30 0q15-18 30 0'/><path d='M1160 350q12-14 24 0q12-14 24 0'/><path d='M980 380q10-12 20 0q10-12 20 0'/></g><path d='M0 640Q250 520 520 600T1050 590T1600 560V1000H0Z' fill='%23805a73'/><path d='M0 720Q300 620 620 700T1200 690T1600 650V1000H0Z' fill='%23553a5c'/><path d='M0 820Q350 730 700 800T1350 790T1600 760V1000H0Z' fill='%232f2030'/><g fill='none' stroke='%235f8f45' stroke-width='12' stroke-dasharray='16 20' stroke-linecap='round'><path d='M0 880Q400 800 800 870T1600 840'/><path d='M0 930Q420 850 820 920T1600 890' stroke='%234d7c3f'/></g><g fill='%23ef4444'><circle cx='300' cy='845' r='5'/><circle cx='640' cy='862' r='5'/><circle cx='1010' cy='872' r='5'/><circle cx='1380' cy='850' r='5'/></g></svg>");
+}
+
+/* ---- Ảnh 2: đêm trăng trên cao nguyên (SVG nhúng) ---- */
+.banner--night {
+  min-height: 70vh;
+  justify-content: center;
+  text-align: center;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000'><defs><linearGradient id='n' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%230b1020'/><stop offset='.6' stop-color='%23312e81'/><stop offset='1' stop-color='%236d28d9'/></linearGradient><radialGradient id='moon' cx='.5' cy='.5' r='.5'><stop offset='.4' stop-color='%23fef3c7' stop-opacity='.55'/><stop offset='1' stop-color='%23fef3c7' stop-opacity='0'/></radialGradient></defs><rect width='1600' height='1000' fill='url(%23n)'/><g fill='%23fff'><circle cx='140' cy='110' r='2.5' opacity='.9'/><circle cx='330' cy='240' r='2' opacity='.7'/><circle cx='520' cy='90' r='3' opacity='.9'/><circle cx='680' cy='300' r='2' opacity='.6'/><circle cx='900' cy='140' r='2.5' opacity='.8'/><circle cx='1080' cy='320' r='2' opacity='.6'/><circle cx='1420' cy='100' r='3' opacity='.9'/><circle cx='1530' cy='290' r='2' opacity='.7'/><circle cx='250' cy='420' r='2' opacity='.5'/><circle cx='1180' cy='80' r='2' opacity='.8'/></g><circle cx='1250' cy='260' r='210' fill='url(%23moon)'/><circle cx='1250' cy='260' r='110' fill='%23fef3c7'/><g fill='%23e9d8a6' opacity='.7'><circle cx='1220' cy='230' r='20'/><circle cx='1290' cy='300' r='14'/><circle cx='1210' cy='305' r='9'/></g><path d='M0 760Q260 650 540 740T1100 720T1600 690V1000H0Z' fill='%231b1440'/><path d='M0 860Q320 770 680 850T1300 830T1600 800V1000H0Z' fill='%23110c2c'/></svg>");
+}
+
+.banner--night::before {
+  background: rgba(15, 10, 30, 0.45);
+}
+
+.banner--night .banner__content {
+  max-width: 760px;
+}
+
+/* ============ CHỮ TRONG BANNER ============ */
+.banner__tag {
+  margin: 0 0 8px;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.banner h1 {
+  margin: 0 0 14px;
+  font-size: clamp(36px, 7vw, 72px);
+  line-height: 1.1;
+}
+
+.hl {
+  background: linear-gradient(90deg, var(--gold), var(--pink), var(--purple));
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+}
+
+.banner__desc {
+  margin: 0 0 28px;
+  font-size: 18px;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.quote {
+  margin: 0;
+}
+
+.quote p {
+  margin: 0 0 16px;
+  font-size: clamp(22px, 4vw, 36px);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.quote footer {
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: var(--gold);
+}
+
+/* ============ NÚT (HOVER NÂNG 3PX) ============ */
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  background: var(--accent);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* ============ NỘI DUNG CUỘN BÌNH THƯỜNG ============ */
+/* Nền đặc để che ảnh nền cố định khi cuộn qua */
+.section {
+  padding: 80px max(24px, 6vw);
+  text-align: center;
+  background: var(--bg);
+}
+
+.section__title {
+  margin: 0 0 8px;
+  font-size: clamp(26px, 5vw, 40px);
+}
+
+.section__sub {
+  max-width: 520px;
+  margin: 0 auto 40px;
+  color: var(--muted);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  width: min(100%, 1000px);
+  margin: 0 auto;
+}
+
+.step {
+  padding: 28px 22px;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+}
+
+.step__num {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.step h3 {
+  margin: 0 0 6px;
+  font-size: 19px;
+}
+
+.step p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.price {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.center {
+  margin-top: 40px;
+}
+
+.footer {
+  padding: 32px 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  background: #120c10;
+}
+
+.footer p {
+  margin: 0 0 4px;
+}
+
+/* ============ DỰ PHÒNG CHO ĐIỆN THOẠI / MÁY CẢM ỨNG ============ */
+/* Hầu hết trình duyệt di động (nhất là iOS Safari) không hỗ trợ tốt
+   background-attachment: fixed nên chuyển về cuộn thường */
+@media (hover: none), (max-width: 768px) {
+  .parallax {
+    background-attachment: scroll;
+  }
+
+  .banner--sunrise {
+    background-position: 60% center;
+  }
+}
+
+/* ============ TRUY CẬP: GIẢM CHUYỂN ĐỘNG ============ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .parallax { background-attachment: scroll; }
+
+  .btn { transition: none; }
+  .btn:hover { transform: none; }
+}

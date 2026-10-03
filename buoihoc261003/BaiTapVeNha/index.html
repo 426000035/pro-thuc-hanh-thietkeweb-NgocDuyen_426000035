@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Highland Coffee | Parallax nhiều lớp</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- .world là khung cuộn có perspective -->
+  <div class="world">
+
+    <!-- Nhóm hero: 4 lớp ảnh + 1 lớp chữ -->
+    <header class="group group--hero">
+      <div class="layer layer--sky"  aria-hidden="true"></div>
+      <div class="layer layer--far"  aria-hidden="true"></div>
+      <div class="layer layer--mid"  aria-hidden="true"></div>
+      <div class="layer layer--near" aria-hidden="true"></div>
+
+      <div class="layer layer--base">
+        <div class="hero__inner">
+          <p class="tag">Highland Coffee</p>
+          <h1>Cuộn xuống để thấy <span class="hl">chiều sâu</span></h1>
+          <p class="desc">Bầu trời, núi xa, đồi gần và hàng cà phê trôi qua với tốc độ khác nhau, như khi bạn ngồi trên xe nhìn ra cao nguyên.</p>
+          <a href="#toc-do" class="btn">Xem cách hoạt động</a>
+        </div>
+        <a href="#toc-do" class="scroll-hint" aria-label="Cuộn xuống">Cuộn xuống ↓</a>
+      </div>
+    </header>
+
+    <!-- Nội dung thường: nền đặc, che các lớp phía sau -->
+    <section class="section" id="toc-do">
+      <h2>Mỗi lớp một tốc độ</h2>
+      <p class="sub">Lớp càng xa càng cuộn chậm. Thanh bên dưới là tốc độ so với chữ (100%).</p>
+
+      <ol class="speeds">
+        <li><span>Bầu trời &amp; mặt trời</span><span class="bar" style="--v:33%"></span><b>33%</b></li>
+        <li><span>Dãy núi xa</span><span class="bar" style="--v:50%"></span><b>50%</b></li>
+        <li><span>Đồi cà phê gần</span><span class="bar" style="--v:67%"></span><b>67%</b></li>
+        <li><span>Luống cây phía trước</span><span class="bar" style="--v:83%"></span><b>83%</b></li>
+        <li><span>Chữ &amp; nội dung</span><span class="bar" style="--v:100%"></span><b>100%</b></li>
+      </ol>
+    </section>
+
+    <footer class="footer">
+      <p>123 Đường Cao Nguyên, Biên Hòa, Đồng Nai · Mở cửa 07:00 - 22:00</p>
+      <p>© 2026 Highland Coffee</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
