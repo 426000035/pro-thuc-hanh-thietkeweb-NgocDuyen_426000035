@@ -1,0 +1,47 @@
+## VAI TRÒ
+Bạn là một chuyên gia thiết kế web chuyên nghiệp.
+
+## Mục tiêu
+
+Chuyển đổi đoạn code style.css hiện tại từ việc sử dụng trực tiếp các giá trị màu sắc và khoảng cách thành hệ thống sử dụng biến CSS.
+
+## Yêu cầu
+
+Hãy phân tích đoạn code CSS được cung cấp và thực hiện các yêu cầu sau:
+
+1. Trích xuất tất cả các mã màu đang được sử dụng trong code.
+
+2. Trích xuất tất cả các giá trị `margin` đang được sử dụng trong code.
+
+3. Trích xuất tất cả các giá trị `padding` đang được sử dụng trong code.
+
+4. Khai báo các giá trị đã trích xuất thành các biến CSS bên trong `:root`.
+
+5. Thay thế các giá trị màu trong code gốc bằng hàm `var()` tương ứng.
+
+6. Thay thế các giá trị `margin` trong code gốc bằng hàm `var()` tương ứng.
+
+7. Thay thế các giá trị `padding` trong code gốc bằng hàm `var()` tương ứng.
+
+8. Giữ nguyên cấu trúc và chức năng của code ban đầu.
+
+9. Không tự ý thay đổi giao diện hoặc thêm các thành phần không có trong code gốc.
+
+10. Không xóa hoặc thay đổi các thuộc tính CSS khác ngoài những giá trị được yêu cầu chuyển thành biến.
+
+## Quy tắc đặt tên biến
+
+Sử dụng tên biến CSS rõ ràng, dễ hiểu và phù hợp với giá trị được lưu.
+
+Ví dụ:
+
+```css
+:root {
+    --color-primary: #2563eb;
+    --color-secondary: #06b6d4;
+    --spacing-small: 8px;
+    --spacing-medium: 16px;
+    --spacing-large: 24px;
+}
+
+## Đánh dấu, ghi chú, giải thích những đoạn code được thay đổi hoặc thêm vào
