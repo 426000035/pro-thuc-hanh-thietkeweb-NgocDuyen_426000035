@@ -3,86 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Highland Coffee | Parallax Banner</title>
+  <title>Highland Coffee | Parallax nhiều lớp</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- BANNER 1: ảnh bình minh đứng yên, nội dung cuộn qua -->
-  <header class="parallax banner banner--sunrise">
-    <div class="banner__content">
-      <p class="banner__tag">Cà phê cao nguyên</p>
-      <h1>Hương vị của <span class="hl">buổi bình minh</span></h1>
-      <p class="banner__desc">Hạt cà phê được hái trên những triền đồi sương sớm, rang chậm và pha ngay trong ngày.</p>
-      <a href="#hanh-trinh" class="btn">Khám phá hành trình</a>
-    </div>
-  </header>
+  <!-- .world là khung cuộn có perspective -->
+  <div class="world">
 
-  <!-- Nội dung thường: nền đặc, che ảnh nền cố định -->
-  <section class="section" id="hanh-trinh">
-    <h2 class="section__title">Từ đồi cao đến ly cà phê</h2>
-    <p class="section__sub">Ba bước nhỏ làm nên một ly cà phê trọn vị.</p>
+    <!-- Nhóm hero: 4 lớp ảnh + 1 lớp chữ -->
+    <header class="group group--hero">
+      <div class="layer layer--sky"  aria-hidden="true"></div>
+      <div class="layer layer--far"  aria-hidden="true"></div>
+      <div class="layer layer--mid"  aria-hidden="true"></div>
+      <div class="layer layer--near" aria-hidden="true"></div>
 
-    <div class="steps">
-      <article class="step">
-        <span class="step__num">01</span>
-        <h3>Hái chín từng quả</h3>
-        <p>Chỉ chọn quả chín đỏ trên độ cao 1.500m, nơi khí hậu mát giúp hạt ngọt và thơm hơn.</p>
-      </article>
-      <article class="step">
-        <span class="step__num">02</span>
-        <h3>Rang theo mẻ nhỏ</h3>
-        <p>Mỗi mẻ vài chục ký, rang vừa lửa để giữ hậu vị cacao và trái cây.</p>
-      </article>
-      <article class="step">
-        <span class="step__num">03</span>
-        <h3>Pha ngay khi bạn gọi</h3>
-        <p>Xay tại chỗ, pha phin hoặc espresso trong vài phút để hương còn nguyên.</p>
-      </article>
-    </div>
-  </section>
+      <div class="layer layer--base">
+        <div class="hero__inner">
+          <p class="tag">Highland Coffee</p>
+          <h1>Cuộn xuống để thấy <span class="hl">chiều sâu</span></h1>
+          <p class="desc">Bầu trời, núi xa, đồi gần và hàng cà phê trôi qua với tốc độ khác nhau, như khi bạn ngồi trên xe nhìn ra cao nguyên.</p>
+          <a href="#toc-do" class="btn">Xem cách hoạt động</a>
+        </div>
+        <a href="#toc-do" class="scroll-hint" aria-label="Cuộn xuống">Cuộn xuống ↓</a>
+      </div>
+    </header>
 
-  <!-- BANNER 2: ảnh đêm trăng -->
-  <section class="parallax banner banner--night" aria-label="Triết lý quán">
-    <div class="banner__content">
-      <blockquote class="quote">
-        <p>“Có những câu chuyện chỉ được kể trọn vẹn bên một ly cà phê nóng.”</p>
-        <footer>— Highland Coffee</footer>
-      </blockquote>
-    </div>
-  </section>
+    <!-- Nội dung thường: nền đặc, che các lớp phía sau -->
+    <section class="section" id="toc-do">
+      <h2>Mỗi lớp một tốc độ</h2>
+      <p class="sub">Lớp càng xa càng cuộn chậm. Thanh bên dưới là tốc độ so với chữ (100%).</p>
 
-  <section class="section">
-    <h2 class="section__title">Thức uống nổi bật</h2>
-    <p class="section__sub">Những ly được gọi nhiều nhất mỗi ngày.</p>
+      <ol class="speeds">
+        <li><span>Bầu trời &amp; mặt trời</span><span class="bar" style="--v:33%"></span><b>33%</b></li>
+        <li><span>Dãy núi xa</span><span class="bar" style="--v:50%"></span><b>50%</b></li>
+        <li><span>Đồi cà phê gần</span><span class="bar" style="--v:67%"></span><b>67%</b></li>
+        <li><span>Luống cây phía trước</span><span class="bar" style="--v:83%"></span><b>83%</b></li>
+        <li><span>Chữ &amp; nội dung</span><span class="bar" style="--v:100%"></span><b>100%</b></li>
+      </ol>
+    </section>
 
-    <div class="steps">
-      <article class="step">
-        <h3>Phin đen đá</h3>
-        <p>Đậm, gắt nhẹ, hậu vị cacao kéo dài.</p>
-        <span class="price">25.000đ</span>
-      </article>
-      <article class="step">
-        <h3>Cà phê muối</h3>
-        <p>Lớp kem muối béo mặn phủ trên nền cà phê sữa.</p>
-        <span class="price">35.000đ</span>
-      </article>
-      <article class="step">
-        <h3>Cold Brew cam sả</h3>
-        <p>Ủ lạnh 18 giờ, thơm cam tươi và sả.</p>
-        <span class="price">45.000đ</span>
-      </article>
-    </div>
+    <footer class="footer">
+      <p>123 Đường Cao Nguyên, Biên Hòa, Đồng Nai · Mở cửa 07:00 - 22:00</p>
+      <p>© 2026 Highland Coffee</p>
+    </footer>
 
-    <div class="center">
-      <a href="#" class="btn">Xem toàn bộ menu</a>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <p>123 Đường Cao Nguyên, Biên Hòa, Đồng Nai · Mở cửa 07:00 - 22:00</p>
-    <p>© 2026 Highland Coffee</p>
-  </footer>
+  </div>
 
 </body>
 </html>

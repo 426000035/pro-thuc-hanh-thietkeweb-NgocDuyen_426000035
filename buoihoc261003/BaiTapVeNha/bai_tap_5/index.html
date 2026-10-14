@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Bean &amp; Bloom | Hamburger Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Thanh đầu trang: logo + nút hamburger -->
+  <header class="topbar">
+    <a href="#trang-chu" class="logo">Bean <span>&amp;</span> Bloom</a>
+
+    <button class="burger" id="burger" type="button"
+            aria-label="Mở menu" aria-expanded="false" aria-controls="menu">
+      <span class="burger__bar"></span>
+      <span class="burger__bar"></span>
+      <span class="burger__bar"></span>
+    </button>
+  </header>
+
+  <!-- Menu toàn màn hình -->
+  <nav class="menu" id="menu" aria-label="Menu chính">
+    <ul class="menu__list">
+      <li><a href="#trang-chu"><small>01</small>Trang chủ</a></li>
+      <li><a href="#thuc-don"><small>02</small>Thực đơn</a></li>
+      <li><a href="#cau-chuyen"><small>03</small>Câu chuyện</a></li>
+      <li><a href="#doi-ngu"><small>04</small>Đội ngũ</a></li>
+      <li><a href="#lien-he"><small>05</small>Liên hệ</a></li>
+    </ul>
+
+    <div class="menu__info">
+      <p>123 Đường Hoa Cà Phê, Biên Hòa, Đồng Nai</p>
+      <p>Mở cửa mỗi ngày: 07:00 - 22:00</p>
+      <a href="tel:0900000000" class="btn">Gọi đặt bàn</a>
+    </div>
+  </nav>
+
+  <!-- Nội dung trang mẫu -->
+  <main>
+    <section class="hero" id="trang-chu">
+      <p class="tag">Since 2020</p>
+      <h1>Bean &amp; Bloom</h1>
+      <p class="desc">Cà phê rang xay thủ công, trà trái cây tươi và bánh nướng mỗi ngày. Bấm vào biểu tượng ở góc phải để mở menu.</p>
+      <a href="#thuc-don" class="btn">Xem thực đơn</a>
+    </section>
+
+    <section class="section" id="thuc-don">
+      <h2>Thực đơn nổi bật</h2>
+      <p class="sub">Ba lựa chọn khách quen gọi nhiều nhất.</p>
+      <div class="cards">
+        <article class="card"><h3>Cà phê sữa đá</h3><p>Phin truyền thống, sữa đặc béo ngọt.</p><b>29.000đ</b></article>
+        <article class="card"><h3>Trà đào cam sả</h3><p>Đào ngâm giòn ngọt, cam vàng và sả đập dập.</p><b>42.000đ</b></article>
+        <article class="card"><h3>Tiramisu</h3><p>Kem mascarpone mềm mịn phủ bột cacao.</p><b>45.000đ</b></article>
+      </div>
+    </section>
+
+    <section class="section" id="cau-chuyen">
+      <h2>Câu chuyện của chúng tôi</h2>
+      <p class="sub">Từ một quầy cà phê nhỏ ở Biên Hòa đến nơi bạn muốn ghé mỗi sáng. Hạt được rang theo mẻ nhỏ mỗi tuần, bánh ra lò từ 6 giờ sáng.</p>
+    </section>
+
+    <section class="section" id="doi-ngu">
+      <h2>Đội ngũ</h2>
+      <p class="sub">Barista, thợ bánh và quản lý cửa hàng luôn sẵn sàng phục vụ bạn.</p>
+    </section>
+
+    <section class="section" id="lien-he">
+      <h2>Liên hệ</h2>
+      <p class="sub">123 Đường Hoa Cà Phê, Biên Hòa, Đồng Nai · 0900 000 000</p>
+    </section>
+  </main>
+
+  <footer class="footer">© 2026 Bean &amp; Bloom</footer>
+
+  <script>
+    const burger = document.getElementById('burger');
+    const body = document.body;
+
+    function setMenu(open) {
+      body.classList.toggle('menu-open', open);
+      burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');
+    }
+
+    burger.addEventListener('click', () => {
+      setMenu(!body.classList.contains('menu-open'));
+    });
+
+    // Bấm vào link trong menu thì đóng menu
+    document.querySelectorAll('#menu a').forEach((a) => {
+      a.addEventListener('click', () => setMenu(false));
+    });
+
+    // Nhấn Esc để đóng
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && body.classList.contains('menu-open')) {
+        setMenu(false);
+        burger.focus();
+      }
+    });
+  </script>
+</body>
+</html>

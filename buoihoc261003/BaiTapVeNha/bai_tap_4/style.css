@@ -9,78 +9,99 @@
   --pink: #ec4899;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html, body { height: 100%; }
 
 body {
   margin: 0;
+  overflow: hidden;            /* khung .world mới là nơi cuộn */
   font-family: system-ui, sans-serif;
   color: var(--text);
   background: var(--bg);
   line-height: 1.6;
 }
 
-/* ============ PARALLAX (CỐT LÕI) ============ */
-/* fixed: ảnh nền neo vào khung nhìn, nội dung cuộn trôi qua phía trên,
-   nên mắt thấy ảnh nền di chuyển chậm hơn nội dung */
-.parallax {
-  position: relative;
-  background-color: var(--bg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
+/* ============ PARALLAX NHIỀU LỚP (CỐT LÕI) ============ */
+/* Khung cuộn + perspective: 1px. Lớp nào lùi xa (translateZ âm) sẽ cuộn chậm hơn */
+.world {
+  height: 100vh;
+  height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: 1px;
+  scroll-behavior: smooth;
 }
 
-/* Lớp phủ giúp chữ luôn dễ đọc */
-.parallax::before {
-  content: "";
+.group {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.group--hero {
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* Mỗi lớp khai báo hệ số --s. Lùi xa (1 - s) px thì bị nhỏ đi,
+   nên phóng lại s lần để vẫn phủ kín. Tốc độ cuộn = 1 / s */
+.layer {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(26, 18, 24, 0.8), rgba(26, 18, 24, 0.15));
+  transform-origin: center;
+  transform: translateZ(calc((1 - var(--s, 1)) * 1px)) scale(var(--s, 1));
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
-.banner {
+/* Lớp phóng to s lần nên chỉ phần giữa của ảnh hiện ra lúc đầu,
+   phần còn lại lộ dần khi cuộn */
+
+/* ---- Lớp 1: bầu trời bình minh + mặt trời + sao (s=3, tốc độ 33%) ---- */
+.layer--sky {
+  --s: 3;
+  background-image:
+    radial-gradient(circle 24px at 60% 44%, #fff7d6 0 97%, transparent 100%),
+    radial-gradient(circle 150px at 60% 44%, rgba(255, 243, 196, 0.85), rgba(255, 243, 196, 0)),
+    radial-gradient(circle 1.5px at 42% 34.5%, #fff 60%, transparent),
+    radial-gradient(circle 1.5px at 50% 35.5%, #fff 60%, transparent),
+    radial-gradient(circle 1.5px at 56% 34%, #fff 60%, transparent),
+    linear-gradient(to bottom, #1e1b4b 0%, #4c1d95 28%, #7e2a8c 34%, #be3a86 38%, #f97316 43%, #fcd34d 48%, #fde68a 55%, #fde68a 100%);
+}
+
+/* ---- Lớp 2: dãy núi xa (s=2, tốc độ 50%) ---- */
+.layer--far {
+  --s: 2;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000' preserveAspectRatio='none'><defs><linearGradient id='a' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23b0709a'/><stop offset='.45' stop-color='%236b4469'/></linearGradient></defs><path fill='url(%23a)' d='M0 600L150 540L300 590L480 480L650 570L820 510L1000 580L1180 490L1350 570L1480 530L1600 590V1000H0Z'/></svg>");
+}
+
+/* ---- Lớp 3: đồi cà phê gần, có luống cây (s=1.5, tốc độ 67%) ---- */
+.layer--mid {
+  --s: 1.5;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000' preserveAspectRatio='none'><path fill='%23553a5c' d='M0 640Q250 540 520 620T1050 600T1600 590V1000H0Z'/><g fill='none' stroke='%236e8f4e' stroke-width='6' stroke-dasharray='10 14' stroke-linecap='round' opacity='.65'><path d='M0 720Q300 640 600 710T1200 690T1600 670'/><path d='M0 790Q300 710 600 780T1200 760T1600 740'/></g></svg>");
+}
+
+/* ---- Lớp 4: luống cây sát phía trước (s=1.2, tốc độ 83%) ---- */
+.layer--near {
+  --s: 1.2;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000' preserveAspectRatio='none'><path fill='%232f2030' d='M0 840Q300 760 650 830T1300 810T1600 780V1000H0Z'/><g fill='%23241826'><circle cx='200' cy='815' r='26'/><circle cx='238' cy='824' r='20'/><circle cx='620' cy='830' r='28'/><circle cx='660' cy='838' r='20'/><circle cx='980' cy='818' r='26'/><circle cx='1020' cy='826' r='20'/><circle cx='1360' cy='800' r='28'/></g><g fill='%23ef4444'><circle cx='195' cy='812' r='3'/><circle cx='622' cy='826' r='3'/><circle cx='982' cy='815' r='3'/><circle cx='1362' cy='797' r='3'/></g><g fill='none' stroke='%234d7c3f' stroke-width='7' stroke-dasharray='12 16' stroke-linecap='round'><path d='M0 905Q400 840 800 900T1600 870'/><path d='M0 960Q400 895 800 955T1600 925'/></g></svg>");
+}
+
+/* ---- Lớp chữ: nằm ở z=0, cuộn đúng tốc độ ---- */
+.layer--base {
+  --s: 1;
   display: flex;
-  align-items: center;
-  padding: 64px max(24px, 6vw);
-}
-
-.banner__content {
-  position: relative;
-  z-index: 1;
-  max-width: 580px;
-}
-
-/* ---- Ảnh 1: bình minh trên đồi cà phê (SVG nhúng) ---- */
-.banner--sunrise {
-  min-height: 100vh;
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000'><defs><linearGradient id='sky' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%231e1b4b'/><stop offset='.45' stop-color='%23be3a86'/><stop offset='.75' stop-color='%23f59e0b'/><stop offset='1' stop-color='%23fde68a'/></linearGradient><radialGradient id='glow' cx='.5' cy='.58' r='.45'><stop offset='0' stop-color='%23fff3c4' stop-opacity='.9'/><stop offset='1' stop-color='%23fff3c4' stop-opacity='0'/></radialGradient></defs><rect width='1600' height='1000' fill='url(%23sky)'/><rect width='1600' height='1000' fill='url(%23glow)'/><g fill='%23fff' opacity='.7'><circle cx='180' cy='120' r='2.5'/><circle cx='420' cy='70' r='2'/><circle cx='700' cy='140' r='2.5'/><circle cx='1020' cy='60' r='2'/><circle cx='1300' cy='130' r='2.5'/><circle cx='1500' cy='80' r='2'/></g><circle cx='800' cy='560' r='120' fill='%23fff7d6'/><g fill='none' stroke='%23311a2b' stroke-width='5' stroke-linecap='round' opacity='.7'><path d='M1050 300q15-18 30 0q15-18 30 0'/><path d='M1160 350q12-14 24 0q12-14 24 0'/><path d='M980 380q10-12 20 0q10-12 20 0'/></g><path d='M0 640Q250 520 520 600T1050 590T1600 560V1000H0Z' fill='%23805a73'/><path d='M0 720Q300 620 620 700T1200 690T1600 650V1000H0Z' fill='%23553a5c'/><path d='M0 820Q350 730 700 800T1350 790T1600 760V1000H0Z' fill='%232f2030'/><g fill='none' stroke='%235f8f45' stroke-width='12' stroke-dasharray='16 20' stroke-linecap='round'><path d='M0 880Q400 800 800 870T1600 840'/><path d='M0 930Q420 850 820 920T1600 890' stroke='%234d7c3f'/></g><g fill='%23ef4444'><circle cx='300' cy='845' r='5'/><circle cx='640' cy='862' r='5'/><circle cx='1010' cy='872' r='5'/><circle cx='1380' cy='850' r='5'/></g></svg>");
-}
-
-/* ---- Ảnh 2: đêm trăng trên cao nguyên (SVG nhúng) ---- */
-.banner--night {
-  min-height: 70vh;
+  flex-direction: column;
   justify-content: center;
-  text-align: center;
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' viewBox='0 0 1600 1000'><defs><linearGradient id='n' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%230b1020'/><stop offset='.6' stop-color='%23312e81'/><stop offset='1' stop-color='%236d28d9'/></linearGradient><radialGradient id='moon' cx='.5' cy='.5' r='.5'><stop offset='.4' stop-color='%23fef3c7' stop-opacity='.55'/><stop offset='1' stop-color='%23fef3c7' stop-opacity='0'/></radialGradient></defs><rect width='1600' height='1000' fill='url(%23n)'/><g fill='%23fff'><circle cx='140' cy='110' r='2.5' opacity='.9'/><circle cx='330' cy='240' r='2' opacity='.7'/><circle cx='520' cy='90' r='3' opacity='.9'/><circle cx='680' cy='300' r='2' opacity='.6'/><circle cx='900' cy='140' r='2.5' opacity='.8'/><circle cx='1080' cy='320' r='2' opacity='.6'/><circle cx='1420' cy='100' r='3' opacity='.9'/><circle cx='1530' cy='290' r='2' opacity='.7'/><circle cx='250' cy='420' r='2' opacity='.5'/><circle cx='1180' cy='80' r='2' opacity='.8'/></g><circle cx='1250' cy='260' r='210' fill='url(%23moon)'/><circle cx='1250' cy='260' r='110' fill='%23fef3c7'/><g fill='%23e9d8a6' opacity='.7'><circle cx='1220' cy='230' r='20'/><circle cx='1290' cy='300' r='14'/><circle cx='1210' cy='305' r='9'/></g><path d='M0 760Q260 650 540 740T1100 720T1600 690V1000H0Z' fill='%231b1440'/><path d='M0 860Q320 770 680 850T1300 830T1600 800V1000H0Z' fill='%23110c2c'/></svg>");
+  padding: 0 max(24px, 6vw) 22vh;
 }
 
-.banner--night::before {
-  background: rgba(15, 10, 30, 0.45);
+.hero__inner {
+  max-width: 580px;
+  text-shadow: 0 2px 18px rgba(20, 10, 30, 0.65);
 }
 
-.banner--night .banner__content {
-  max-width: 760px;
-}
-
-/* ============ CHỮ TRONG BANNER ============ */
-.banner__tag {
+.tag {
   margin: 0 0 8px;
   font-size: 13px;
   letter-spacing: 4px;
@@ -88,9 +109,9 @@ body {
   color: var(--gold);
 }
 
-.banner h1 {
+.hero__inner h1 {
   margin: 0 0 14px;
-  font-size: clamp(36px, 7vw, 72px);
+  font-size: clamp(34px, 7vw, 68px);
   line-height: 1.1;
 }
 
@@ -100,30 +121,28 @@ body {
           background-clip: text;
   -webkit-text-fill-color: transparent;
           color: transparent;
+  text-shadow: none;
 }
 
-.banner__desc {
+.desc {
   margin: 0 0 28px;
   font-size: 18px;
+}
+
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  font-size: 13px;
   color: var(--text);
-  opacity: 0.9;
+  text-decoration: none;
+  transform: translateX(-50%);
+  animation: bounce 1.6s ease-in-out infinite;
 }
 
-.quote {
-  margin: 0;
-}
-
-.quote p {
-  margin: 0 0 16px;
-  font-size: clamp(22px, 4vw, 36px);
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-.quote footer {
-  font-size: 15px;
-  letter-spacing: 1px;
-  color: var(--gold);
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50%      { transform: translate(-50%, 6px); }
 }
 
 /* ============ NÚT (HOVER NÂNG 3PX) ============ */
@@ -136,6 +155,7 @@ body {
   font-weight: 600;
   color: #fff;
   text-decoration: none;
+  text-shadow: none;
   background: var(--accent);
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
@@ -154,72 +174,71 @@ body {
   outline-offset: 3px;
 }
 
-/* ============ NỘI DUNG CUỘN BÌNH THƯỜNG ============ */
-/* Nền đặc để che ảnh nền cố định khi cuộn qua */
+/* ============ NỘI DUNG THƯỜNG ============ */
+/* position: relative + nền đặc để nằm đè lên các lớp parallax phía trước */
 .section {
+  position: relative;
   padding: 80px max(24px, 6vw);
   text-align: center;
   background: var(--bg);
 }
 
-.section__title {
+.section h2 {
   margin: 0 0 8px;
   font-size: clamp(26px, 5vw, 40px);
 }
 
-.section__sub {
+.sub {
   max-width: 520px;
   margin: 0 auto 40px;
   color: var(--muted);
 }
 
-.steps {
+.speeds {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
-  width: min(100%, 1000px);
+  gap: 14px;
+  width: min(100%, 720px);
   margin: 0 auto;
+  padding: 0;
+  list-style: none;
 }
 
-.step {
-  padding: 28px 22px;
+.speeds li {
+  display: grid;
+  grid-template-columns: minmax(130px, 1fr) 2fr 48px;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  text-align: left;
   background: var(--surface);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 16px;
+  border-radius: 14px;
 }
 
-.step__num {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 34px;
-  font-weight: 800;
+.speeds b {
+  text-align: right;
   color: var(--gold);
 }
 
-.step h3 {
-  margin: 0 0 6px;
-  font-size: 19px;
+.bar {
+  position: relative;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.step p {
-  margin: 0;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.price {
-  display: inline-block;
-  margin-top: 14px;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--gold);
-}
-
-.center {
-  margin-top: 40px;
+.bar::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--v);
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--purple), var(--pink));
 }
 
 .footer {
+  position: relative;
   padding: 32px 16px;
   text-align: center;
   font-size: 13px;
@@ -227,29 +246,23 @@ body {
   background: #120c10;
 }
 
-.footer p {
-  margin: 0 0 4px;
+.footer p { margin: 0 0 4px; }
+
+/* ============ DỰ PHÒNG: ĐIỆN THOẠI & GIẢM CHUYỂN ĐỘNG ============ */
+/* Bỏ perspective, giữ nguyên bố cục (scale) nhưng các lớp cuộn cùng tốc độ */
+@media (hover: none), (max-width: 768px), (prefers-reduced-motion: reduce) {
+  .world { perspective: none; }
+  .layer { transform: scale(var(--s, 1)); }
 }
 
-/* ============ DỰ PHÒNG CHO ĐIỆN THOẠI / MÁY CẢM ỨNG ============ */
-/* Hầu hết trình duyệt di động (nhất là iOS Safari) không hỗ trợ tốt
-   background-attachment: fixed nên chuyển về cuộn thường */
-@media (hover: none), (max-width: 768px) {
-  .parallax {
-    background-attachment: scroll;
-  }
-
-  .banner--sunrise {
-    background-position: 60% center;
-  }
-}
-
-/* ============ TRUY CẬP: GIẢM CHUYỂN ĐỘNG ============ */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-
-  .parallax { background-attachment: scroll; }
-
+  .world { scroll-behavior: auto; }
+  .scroll-hint { animation: none; }
   .btn { transition: none; }
   .btn:hover { transform: none; }
+}
+
+@media (max-width: 560px) {
+  .speeds li { grid-template-columns: 1fr 48px; }
+  .speeds .bar { grid-column: 1 / -1; grid-row: 2; }
 }

@@ -2,53 +2,383 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Highland Coffee | Parallax nhiều lớp</title>
+  <!-- viewport-fit=cover: cho phép nút FAB tránh vùng tai thỏ trên điện thoại -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Trần Minh Khoa | Front-end Developer Portfolio</title>
+
+  <!-- Đánh dấu trình duyệt có JS. CSS dựa vào class "js" để biết
+       có thể tạm dừng hiệu ứng thanh kỹ năng cho đến khi cuộn tới (xem Bài 6).
+       Nếu tắt JS, class này không có và thanh hiện ngay giá trị cuối. -->
+  <script>document.documentElement.classList.add('js');</script>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- .world là khung cuộn có perspective -->
-  <div class="world">
+  <!-- =========================================================
+       BÀI 5: HAMBURGER MENU
+       Thanh đầu trang gồm logo và nút 3 gạch. Khi bấm, JS thêm class
+       "menu-open" vào <body>, CSS dùng transition để biến 3 gạch thành X.
+       ========================================================= -->
+  <header class="topbar">
+    <a href="#trang-chu" class="logo">Minh<span>.</span>Khoa</a>
 
-    <!-- Nhóm hero: 4 lớp ảnh + 1 lớp chữ -->
-    <header class="group group--hero">
-      <div class="layer layer--sky"  aria-hidden="true"></div>
-      <div class="layer layer--far"  aria-hidden="true"></div>
-      <div class="layer layer--mid"  aria-hidden="true"></div>
-      <div class="layer layer--near" aria-hidden="true"></div>
+    <!-- aria-expanded / aria-label được JS cập nhật để trình đọc màn hình hiểu trạng thái -->
+    <button class="burger" id="burger" type="button"
+            aria-label="Mở menu" aria-expanded="false" aria-controls="menu">
+      <span class="burger__bar"></span>
+      <span class="burger__bar"></span>
+      <span class="burger__bar"></span>
+    </button>
+  </header>
 
-      <div class="layer layer--base">
-        <div class="hero__inner">
-          <p class="tag">Highland Coffee</p>
-          <h1>Cuộn xuống để thấy <span class="hl">chiều sâu</span></h1>
-          <p class="desc">Bầu trời, núi xa, đồi gần và hàng cà phê trôi qua với tốc độ khác nhau, như khi bạn ngồi trên xe nhìn ra cao nguyên.</p>
-          <a href="#toc-do" class="btn">Xem cách hoạt động</a>
+  <!-- Menu toàn màn hình, loang tròn ra từ vị trí nút hamburger -->
+  <nav class="menu" id="menu" aria-label="Menu chính">
+    <ul class="menu__list">
+      <li><a href="#trang-chu"><small>01</small>Trang chủ</a></li>
+      <li><a href="#ky-nang"><small>02</small>Kỹ năng</a></li>
+      <li><a href="#triet-ly"><small>03</small>Triết lý</a></li>
+      <li><a href="#doi-ngu"><small>04</small>Đội ngũ</a></li>
+      <li><a href="#lien-he"><small>05</small>Liên hệ</a></li>
+    </ul>
+
+    <div class="menu__info">
+      <p>minhkhoa.dev@gmail.com</p>
+      <p>Biên Hòa, Đồng Nai · Nhận dự án từ xa toàn quốc</p>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- =========================================================
+         BÀI 4 (banner 1): PARALLAX
+         Lớp "parallax" dùng background-attachment: fixed nên ảnh nền
+         đứng yên theo khung nhìn, nội dung cuộn trôi qua phía trên.
+         BÀI 3: TYPING EFFECT nằm trong khối này.
+         ========================================================= -->
+    <header class="parallax hero" id="trang-chu">
+      <div class="hero__inner">
+        <p class="hello">Xin chào, mình là Minh Khoa 👋</p>
+
+        <!-- Hiệu ứng tự gõ chỉ bằng CSS.
+             LƯU Ý: giữ toàn bộ chữ trên MỘT dòng code để không sinh khoảng trắng thừa
+             làm lệch số ký tự. Chuỗi "Tôi là một Web Developer..." dài đúng 27 ký tự
+             (tính cả dấu cách), khớp với --chars: 27 trong CSS. -->
+        <h1 class="typing-line"><span class="typing">Tôi là một <span class="hl">Web Developer</span>...</span></h1>
+
+        <p class="hero__desc">Mình xây dựng website nhanh, đẹp và dễ dùng cho quán cà phê, cửa hàng và các thương hiệu nhỏ. Hơn 3 năm làm giao diện với HTML, CSS, JavaScript và React.</p>
+
+        <div class="hero__actions">
+          <a href="#ky-nang" class="btn">Xem kỹ năng</a>
+          <a href="#lien-he" class="btn btn--ghost">Liên hệ mình</a>
         </div>
-        <a href="#toc-do" class="scroll-hint" aria-label="Cuộn xuống">Cuộn xuống ↓</a>
       </div>
     </header>
 
-    <!-- Nội dung thường: nền đặc, che các lớp phía sau -->
-    <section class="section" id="toc-do">
-      <h2>Mỗi lớp một tốc độ</h2>
-      <p class="sub">Lớp càng xa càng cuộn chậm. Thanh bên dưới là tốc độ so với chữ (100%).</p>
+    <!-- =========================================================
+         BÀI 6: SKILL BAR ANIMATION
+         Mỗi kỹ năng chỉ cần khai báo --value (0-100) trong style.
+         CSS tự tính chiều rộng đích của thanh và số % đếm tăng.
+         --i là thứ tự, dùng để các thanh chạy lần lượt (stagger).
+         --c1, --c2 là cặp màu gradient riêng của từng thanh.
+         role="progressbar" + aria-valuenow giúp trình đọc màn hình đọc được giá trị thật.
+         ========================================================= -->
+    <section class="section skills" id="ky-nang">
+      <p class="tag">Kỹ năng</p>
+      <h2 class="section__title">Mình làm tốt những gì?</h2>
+      <p class="section__sub">Mỗi thanh thể hiện mức độ thành thạo hiện tại của mình.</p>
 
-      <ol class="speeds">
-        <li><span>Bầu trời &amp; mặt trời</span><span class="bar" style="--v:33%"></span><b>33%</b></li>
-        <li><span>Dãy núi xa</span><span class="bar" style="--v:50%"></span><b>50%</b></li>
-        <li><span>Đồi cà phê gần</span><span class="bar" style="--v:67%"></span><b>67%</b></li>
-        <li><span>Luống cây phía trước</span><span class="bar" style="--v:83%"></span><b>83%</b></li>
-        <li><span>Chữ &amp; nội dung</span><span class="bar" style="--v:100%"></span><b>100%</b></li>
-      </ol>
+      <div class="panels">
+
+        <div class="panel">
+          <h3>Front-end</h3>
+          <ul class="list">
+            <li class="skill" style="--value: 90; --i: 0; --c1: #f97316; --c2: #ec4899;">
+              <div class="skill__top">
+                <span class="skill__name">HTML5</span>
+                <!-- aria-hidden: số đếm chỉ để nhìn, tránh trình đọc màn hình đọc lặp -->
+                <span class="skill__num" aria-hidden="true"></span>
+              </div>
+              <div class="bar" role="progressbar" aria-label="HTML5" aria-valuemin="0" aria-valuemax="100" aria-valuenow="90">
+                <span class="bar__fill"></span>
+              </div>
+            </li>
+
+            <li class="skill" style="--value: 85; --i: 1; --c1: #3b82f6; --c2: #8b5cf6;">
+              <div class="skill__top">
+                <span class="skill__name">CSS3 &amp; Animation</span>
+                <span class="skill__num" aria-hidden="true"></span>
+              </div>
+              <div class="bar" role="progressbar" aria-label="CSS3 và Animation" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85">
+                <span class="bar__fill"></span>
+              </div>
+            </li>
+
+            <li class="skill" style="--value: 75; --i: 2; --c1: #fcd34d; --c2: #f59e0b;">
+              <div class="skill__top">
+                <span class="skill__name">JavaScript</span>
+                <span class="skill__num" aria-hidden="true"></span>
+              </div>
+              <div class="bar" role="progressbar" aria-label="JavaScript" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75">
+                <span class="bar__fill"></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3>Framework &amp; Công cụ</h3>
+          <ul class="list">
+            <li class="skill" style="--value: 70; --i: 3; --c1: #22d3ee; --c2: #3b82f6;">
+              <div class="skill__top">
+                <span class="skill__name">React</span>
+                <span class="skill__num" aria-hidden="true"></span>
+              </div>
+              <div class="bar" role="progressbar" aria-label="React" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70">
+                <span class="bar__fill"></span>
+              </div>
+            </li>
+
+            <li class="skill" style="--value: 80; --i: 4; --c1: #8b5cf6; --c2: #ec4899;">
+              <div class="skill__top">
+                <span class="skill__name">Responsive Design</span>
+                <span class="skill__num" aria-hidden="true"></span>
+              </div>
+              <div class="bar" role="progressbar" aria-label="Responsive Design" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80">
+                <span class="bar__fill"></span>
+              </div>
+            </li>
+
+            <li class="skill" style="--value: 72; --i: 5; --c1: #f97316; --c2: #ef4444;">
+              <div class="skill__top">
+                <span class="skill__name">Git &amp; GitHub</span>
+                <span class="skill__num" aria-hidden="true"></span>
+              </div>
+              <div class="bar" role="progressbar" aria-label="Git và GitHub" aria-valuemin="0" aria-valuemax="100" aria-valuenow="72">
+                <span class="bar__fill"></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
     </section>
 
-    <footer class="footer">
-      <p>123 Đường Cao Nguyên, Biên Hòa, Đồng Nai · Mở cửa 07:00 - 22:00</p>
-      <p>© 2026 Highland Coffee</p>
-    </footer>
+    <!-- =========================================================
+         BÀI 4 (banner 2): PARALLAX
+         Banner thứ hai dùng cùng kỹ thuật, ảnh nền khác.
+         Phần "section" ở trên và dưới có nền đặc nên che ảnh nền,
+         tạo cảm giác ảnh trượt phía sau nội dung.
+         ========================================================= -->
+    <section class="parallax banner" id="triet-ly" aria-label="Triết lý làm việc">
+      <blockquote class="quote">
+        <p>“Một trang web tốt không chỉ đẹp khi nhìn, mà còn mượt khi chạm.”</p>
+        <footer>— Minh Khoa</footer>
+      </blockquote>
+    </section>
 
-  </div>
+    <!-- =========================================================
+         BÀI 2: CARD FLIP EFFECT
+         Cấu trúc 3 lớp:
+           .card         = khung đứng yên, nhận hover, tạo perspective 3D
+           .card__inner  = phần xoay 180 độ
+           .face         = hai mặt (trước/sau), chồng lên nhau
+         tabindex="0" để người dùng bàn phím và điện thoại (chạm) cũng lật được.
+         ========================================================= -->
+    <section class="section team" id="doi-ngu">
+      <p class="tag">Đội ngũ cộng tác</p>
+      <h2 class="section__title">Làm việc cùng ai?</h2>
+      <p class="section__sub">Rê chuột (hoặc chạm) vào thẻ để xem thông tin liên hệ.</p>
 
+      <div class="team__grid">
+
+        <!-- Thẻ 1 -->
+        <article class="card" tabindex="0" aria-label="Trần Minh Khoa, Front-end Developer">
+          <div class="card__inner">
+            <div class="face face--front">
+              <div class="avatar">
+                <!-- Ảnh minh họa vẽ bằng SVG, không cần file ảnh -->
+                <svg viewBox="0 0 200 200" role="img" aria-label="Ảnh minh họa Minh Khoa">
+                  <defs><linearGradient id="a1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#3b82f6"/></linearGradient></defs>
+                  <rect width="200" height="200" fill="url(#a1)"/>
+                  <path d="M30 200c0-42 31-66 70-66s70 24 70 66z" fill="#1e293b"/>
+                  <rect x="86" y="108" width="28" height="32" rx="10" fill="#f1c9a5"/>
+                  <ellipse cx="100" cy="82" rx="34" ry="38" fill="#f1c9a5"/>
+                  <path d="M64 78c-2-30 18-46 38-44 22 2 36 20 34 44-8-14-20-22-36-22s-28 8-36 22z" fill="#1c1917"/>
+                  <circle cx="88" cy="86" r="9" fill="none" stroke="#1c1917" stroke-width="3"/>
+                  <circle cx="112" cy="86" r="9" fill="none" stroke="#1c1917" stroke-width="3"/>
+                  <path d="M97 86h6" stroke="#1c1917" stroke-width="3"/>
+                  <path d="M88 103q12 9 24 0" stroke="#b4572f" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3 class="name">Trần Minh Khoa</h3>
+              <p class="role">Front-end Developer</p>
+              <p class="bio">Chủ portfolio. Lo giao diện, hiệu ứng và tối ưu tốc độ tải trang.</p>
+              <span class="flip-hint" aria-hidden="true">↻ Lật để xem liên hệ</span>
+            </div>
+
+            <div class="face face--back">
+              <h3 class="name">Minh Khoa</h3>
+              <p class="quote-s">“Code gọn, giao diện sáng, bàn giao đúng hẹn.”</p>
+              <ul class="contact">
+                <li><span aria-hidden="true">📞</span><a href="tel:0901234567">0901 234 567</a></li>
+                <li><span aria-hidden="true">✉️</span><a href="mailto:minhkhoa.dev@gmail.com">minhkhoa.dev@gmail.com</a></li>
+                <li><span aria-hidden="true">💬</span><a href="https://zalo.me/0901234567">Zalo: 0901 234 567</a></li>
+              </ul>
+              <a href="mailto:minhkhoa.dev@gmail.com" class="btn btn--sm">Gửi email</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Thẻ 2 -->
+        <article class="card" tabindex="0" aria-label="Lê Thu Hà, UI/UX Designer">
+          <div class="card__inner">
+            <div class="face face--front">
+              <div class="avatar">
+                <svg viewBox="0 0 200 200" role="img" aria-label="Ảnh minh họa Thu Hà">
+                  <defs><linearGradient id="a2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ec4899"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+                  <rect width="200" height="200" fill="url(#a2)"/>
+                  <path d="M30 200c0-42 31-66 70-66s70 24 70 66z" fill="#fdf2f8"/>
+                  <path d="M60 90c-4-44 22-62 42-60 24 2 44 22 38 62 2 24 4 38 8 50H52c4-12 6-28 8-52z" fill="#1f1a17"/>
+                  <rect x="86" y="108" width="28" height="32" rx="10" fill="#f6d2b4"/>
+                  <ellipse cx="100" cy="84" rx="33" ry="37" fill="#f6d2b4"/>
+                  <path d="M66 76c4-22 22-32 38-30 18 2 30 14 32 30-14-4-30-12-40-24-6 12-18 22-30 24z" fill="#1f1a17"/>
+                  <circle cx="88" cy="88" r="3.5" fill="#1f1a17"/>
+                  <circle cx="112" cy="88" r="3.5" fill="#1f1a17"/>
+                  <path d="M88 104q12 10 24 0" stroke="#c2410c" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3 class="name">Lê Thu Hà</h3>
+              <p class="role">UI/UX Designer</p>
+              <p class="bio">Thiết kế giao diện trên Figma, chuyển giao file sạch cho dev.</p>
+              <span class="flip-hint" aria-hidden="true">↻ Lật để xem liên hệ</span>
+            </div>
+
+            <div class="face face--back">
+              <h3 class="name">Thu Hà</h3>
+              <p class="quote-s">“Thiết kế tốt là thiết kế người dùng không cần phải nghĩ.”</p>
+              <ul class="contact">
+                <li><span aria-hidden="true">📞</span><a href="tel:0912345678">0912 345 678</a></li>
+                <li><span aria-hidden="true">✉️</span><a href="mailto:thuha.design@gmail.com">thuha.design@gmail.com</a></li>
+                <li><span aria-hidden="true">💬</span><a href="https://zalo.me/0912345678">Zalo: 0912 345 678</a></li>
+              </ul>
+              <a href="mailto:thuha.design@gmail.com" class="btn btn--sm">Gửi email</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Thẻ 3 -->
+        <article class="card" tabindex="0" aria-label="Phạm Quốc Bảo, Back-end Developer">
+          <div class="card__inner">
+            <div class="face face--front">
+              <div class="avatar">
+                <svg viewBox="0 0 200 200" role="img" aria-label="Ảnh minh họa Quốc Bảo">
+                  <defs><linearGradient id="a3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f59e0b"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>
+                  <rect width="200" height="200" fill="url(#a3)"/>
+                  <path d="M30 200c0-42 31-66 70-66s70 24 70 66z" fill="#292524"/>
+                  <path d="M84 150l16 22 16-22z" fill="#f5ebe0"/>
+                  <rect x="86" y="108" width="28" height="32" rx="10" fill="#e8b98f"/>
+                  <ellipse cx="100" cy="82" rx="34" ry="38" fill="#e8b98f"/>
+                  <path d="M64 76c0-28 18-42 38-42 22 0 36 16 34 42-6-10-14-16-22-18-12 2-34 2-50 18z" fill="#1c1917"/>
+                  <circle cx="88" cy="86" r="3.5" fill="#1c1917"/>
+                  <circle cx="112" cy="86" r="3.5" fill="#1c1917"/>
+                  <path d="M88 102q12 9 24 0" stroke="#a8431f" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3 class="name">Phạm Quốc Bảo</h3>
+              <p class="role">Back-end Developer</p>
+              <p class="bio">Lo máy chủ, cơ sở dữ liệu và kết nối thanh toán cho website.</p>
+              <span class="flip-hint" aria-hidden="true">↻ Lật để xem liên hệ</span>
+            </div>
+
+            <div class="face face--back">
+              <h3 class="name">Quốc Bảo</h3>
+              <p class="quote-s">“Hệ thống ổn định là nền móng của mọi giao diện đẹp.”</p>
+              <ul class="contact">
+                <li><span aria-hidden="true">📞</span><a href="tel:0923456789">0923 456 789</a></li>
+                <li><span aria-hidden="true">✉️</span><a href="mailto:quocbao.dev@gmail.com">quocbao.dev@gmail.com</a></li>
+                <li><span aria-hidden="true">💬</span><a href="https://zalo.me/0923456789">Zalo: 0923 456 789</a></li>
+              </ul>
+              <a href="mailto:quocbao.dev@gmail.com" class="btn btn--sm">Gửi email</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Phần liên hệ cuối trang (đích đến của nút FAB) -->
+    <section class="section contact-section" id="lien-he">
+      <p class="tag">Liên hệ</p>
+      <h2 class="section__title">Cùng làm một dự án nhé?</h2>
+      <p class="section__sub">Kể mình nghe ý tưởng của bạn, mình sẽ phản hồi trong vòng 24 giờ.</p>
+      <a href="mailto:minhkhoa.dev@gmail.com" class="btn">minhkhoa.dev@gmail.com</a>
+    </section>
+  </main>
+
+  <footer class="footer">© 2026 Trần Minh Khoa · Portfolio bài tập CSS Animation &amp; Transition</footer>
+
+  <!-- =========================================================
+       BÀI 1: FLOATING ACTION BUTTON (FAB)
+       Nút tròn cố định góc phải dưới (position: fixed).
+       Tách 3 lớp để các hiệu ứng không ghi đè transform của nhau:
+         .fab         = nút ngoài, lo vị trí và hover nâng lên
+         .fab__ring   = hai vòng sóng lan tỏa ra ngoài
+         .fab__core   = lõi tròn, lo hiệu ứng phập phồng
+       ========================================================= -->
+  <a href="#lien-he" class="fab" aria-label="Liên hệ với mình">
+    <span class="fab__ring" aria-hidden="true"></span>
+    <span class="fab__ring fab__ring--delay" aria-hidden="true"></span>
+    <span class="fab__core">Liên hệ</span>
+  </a>
+
+  <script>
+    /* ---------- BÀI 5: bật/tắt menu ----------
+       JS chỉ làm một việc: thêm/bớt class "menu-open" ở <body>
+       và cập nhật thuộc tính truy cập. Toàn bộ hiệu ứng do CSS transition đảm nhiệm. */
+    const burger = document.getElementById('burger');
+    const body = document.body;
+
+    function setMenu(open) {
+      body.classList.toggle('menu-open', open);
+      burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');
+    }
+
+    burger.addEventListener('click', () => setMenu(!body.classList.contains('menu-open')));
+
+    // Bấm vào một link trong menu thì đóng menu
+    document.querySelectorAll('#menu a').forEach((a) => {
+      a.addEventListener('click', () => setMenu(false));
+    });
+
+    // Nhấn Esc để đóng menu, đưa focus về nút hamburger
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && body.classList.contains('menu-open')) {
+        setMenu(false);
+        burger.focus();
+      }
+    });
+
+    /* ---------- BÀI 6: bắt đầu chạy thanh kỹ năng khi nhìn thấy ----------
+       Phần "Kỹ năng" nằm bên dưới màn hình đầu tiên. Nếu cho chạy ngay lúc tải,
+       người dùng chưa kịp thấy thì hiệu ứng đã xong. Vì vậy ta thêm class
+       "is-visible" khi phần này lọt vào khung nhìn để CSS bắt đầu chạy. */
+    const skills = document.getElementById('ky-nang');
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            skills.classList.add('is-visible');
+            io.disconnect();               // chỉ chạy một lần
+          }
+        });
+      }, { threshold: 0.3 });               // 30% phần tử hiện ra là kích hoạt
+      io.observe(skills);
+    } else {
+      skills.classList.add('is-visible');   // trình duyệt cũ: chạy luôn
+    }
+  </script>
 </body>
 </html>

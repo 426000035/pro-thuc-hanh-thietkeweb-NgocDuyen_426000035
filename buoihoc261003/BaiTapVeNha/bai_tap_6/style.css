@@ -1,0 +1,212 @@
+/* Đăng ký --num là số nguyên để có thể animate (đếm từ 0 đến giá trị đích) */
+@property --num {
+  syntax: "<integer>";
+  inherits: false;
+  initial-value: 0;
+}
+
+:root {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --track: rgba(255, 255, 255, 0.09);
+  --gold: #fcd34d;
+  --purple: #8b5cf6;
+  --pink: #ec4899;
+  --blue: #3b82f6;
+
+  --fill-dur: 1.6s;                 /* thời gian chạy của mỗi thanh */
+  --stagger: 0.12s;                 /* độ trễ giữa các thanh */
+  --start: 0.4s;                    /* chờ một chút sau khi trang tải */
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(139, 92, 246, 0.25), transparent 50%),
+    radial-gradient(circle at 85% 90%, rgba(59, 130, 246, 0.2), transparent 50%),
+    var(--bg);
+  line-height: 1.6;
+}
+
+/* ============ BỐ CỤC ============ */
+.skills {
+  width: min(92%, 1000px);
+  margin: 0 auto;
+  padding: 72px 0;
+}
+
+.skills__head {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.tag {
+  margin: 0 0 8px;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.skills__head h1 {
+  margin: 0 0 12px;
+  font-size: clamp(30px, 6vw, 48px);
+  line-height: 1.15;
+  background: linear-gradient(90deg, var(--purple), var(--pink), var(--blue));
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+}
+
+.intro {
+  max-width: 560px;
+  margin: 0 auto;
+  color: var(--muted);
+}
+
+.panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.panel {
+  padding: 28px 26px 12px;
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.panel h2 {
+  margin: 0 0 22px;
+  font-size: 20px;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ============ MỖI KỸ NĂNG ============ */
+.skill {
+  margin-bottom: 22px;
+
+  /* Mỗi thanh bắt đầu chậm hơn thanh trước một chút */
+  --delay: calc(var(--start) + var(--i, 0) * var(--stagger));
+}
+
+.skill__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.skill__name {
+  font-weight: 600;
+}
+
+/* Số phần trăm đếm tăng bằng bộ đếm CSS (counter) */
+.skill__num {
+  font-variant-numeric: tabular-nums;   /* chữ số rộng bằng nhau, số không bị rung */
+  font-weight: 700;
+  color: var(--gold);
+
+  counter-reset: pct var(--num);
+  animation: count var(--fill-dur) cubic-bezier(0.22, 1, 0.36, 1) var(--delay) both;
+}
+
+.skill__num::after {
+  content: counter(pct) "%";
+}
+
+/* ============ THANH KỸ NĂNG (CỐT LÕI) ============ */
+.bar {
+  position: relative;
+  height: 12px;
+  overflow: hidden;
+  background: var(--track);
+  border-radius: 99px;
+}
+
+.bar__fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--c1, var(--purple)), var(--c2, var(--pink)));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--c2, var(--pink)) 55%, transparent);
+
+  /* both: giữ width: 0 trong lúc chờ delay, và giữ giá trị đích khi chạy xong */
+  animation: fill var(--fill-dur) cubic-bezier(0.22, 1, 0.36, 1) var(--delay) both;
+}
+
+/* Vệt sáng quét qua thanh sau khi chạy xong */
+.bar__fill {
+  position: relative;
+  overflow: hidden;
+}
+
+.bar__fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: translateX(-120%);
+  animation: shine 2.4s ease-in-out calc(var(--delay) + var(--fill-dur)) infinite;
+}
+
+@keyframes fill {
+  from { width: 0; }
+  to   { width: calc(var(--value) * 1%); }
+}
+
+@keyframes count {
+  from { --num: 0; }
+  to   { --num: var(--value); }
+}
+
+@keyframes shine {
+  0%        { transform: translateX(-120%); }
+  60%, 100% { transform: translateX(320%); }
+}
+
+/* ============ DỰ PHÒNG & TRUY CẬP ============ */
+/* Trình duyệt cũ chưa hỗ trợ @property: bỏ đếm số, hiện sẵn số cuối cùng */
+@supports not (animation-timeline: auto) {
+  /* (không làm gì: khối bên dưới mới là phần xử lý dự phòng) */
+}
+
+@supports not (syntax: "<integer>") {
+  /* chỉ để minh họa; xem ghi chú trong phần giải thích */
+}
+
+/* Người dùng bật giảm chuyển động: hiện ngay giá trị cuối, không chạy */
+@media (prefers-reduced-motion: reduce) {
+  .bar__fill {
+    width: calc(var(--value) * 1%);
+    animation: none;
+  }
+
+  .bar__fill::after { display: none; }
+
+  .skill__num {
+    --num: var(--value);
+    animation: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .panel { padding: 22px 18px 8px; }
+}

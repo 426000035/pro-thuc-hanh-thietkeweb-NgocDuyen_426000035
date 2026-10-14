@@ -1,0 +1,322 @@
+:root {
+  --bg: #1c1410;
+  --surface: #2a1f19;
+  --text: #f5ebe0;
+  --muted: #c9b8a8;
+  --accent: #b45309;
+  --gold: #fcd34d;
+  --purple: #8b5cf6;
+  --pink: #ec4899;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+
+/* Khóa cuộn trang khi menu đang mở */
+body.menu-open { overflow: hidden; }
+
+/* ============ THANH ĐẦU TRANG ============ */
+.topbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;               /* nằm trên lớp menu để nút luôn bấm được */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px max(20px, 5vw);
+  padding-top: max(14px, env(safe-area-inset-top));
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.logo span { color: var(--gold); }
+
+/* ============ NÚT HAMBURGER → X (CỐT LÕI) ============ */
+.burger {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(42, 31, 25, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  transition: background 0.3s ease, transform 0.3s var(--ease-spring);
+}
+
+.burger:hover { transform: scale(1.08); }
+
+.burger:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* Cả 3 gạch cùng đặt ở TÂM nút, rồi dịch lên/xuống 8px bằng transform.
+   Nhờ vậy khi mở chỉ cần đưa translateY về 0 và xoay, hai gạch sẽ
+   chồng khít lên nhau thành chữ X mà không cần tính toán thêm. */
+.burger__bar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 3px;
+  margin: -1.5px 0 0 -11px;
+  border-radius: 3px;
+  background: var(--text);
+  transition:
+    transform 0.45s var(--ease-out),
+    opacity 0.25s ease,
+    background 0.3s ease;
+}
+
+.burger__bar:nth-child(1) { transform: translateY(-7px); }
+.burger__bar:nth-child(2) { transform: scaleX(1); }
+.burger__bar:nth-child(3) { transform: translateY(7px); }
+
+/* Trạng thái mở */
+.menu-open .burger { background: var(--accent); }
+
+.menu-open .burger__bar:nth-child(1) { transform: translateY(0) rotate(45deg); }
+.menu-open .burger__bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.menu-open .burger__bar:nth-child(3) { transform: translateY(0) rotate(-45deg); }
+
+/* ============ MENU TOÀN MÀN HÌNH ============ */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 90px max(24px, 8vw) 40px;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(139, 92, 246, 0.28), transparent 50%),
+    radial-gradient(circle at 85% 90%, rgba(236, 72, 153, 0.22), transparent 50%),
+    #140e0b;
+
+  /* Đóng: thu về một chấm tròn ngay vị trí nút hamburger */
+  clip-path: circle(0 at calc(100% - 44px) 38px);
+  visibility: hidden;
+  transition:
+    clip-path 0.7s var(--ease-out),
+    visibility 0s linear 0.7s;     /* chờ animation đóng xong mới ẩn hẳn */
+}
+
+/* Mở: vòng tròn loang ra phủ kín màn hình */
+.menu-open .menu {
+  clip-path: circle(150% at calc(100% - 44px) 38px);
+  visibility: visible;
+  transition:
+    clip-path 0.8s var(--ease-out),
+    visibility 0s;
+}
+
+.menu__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu__list a {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 6px 0;
+  font-size: clamp(32px, 8vw, 64px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s ease, padding-left 0.4s var(--ease-out);
+}
+
+.menu__list a small {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+
+.menu__list a:hover,
+.menu__list a:focus-visible {
+  padding-left: 14px;
+  color: var(--gold);
+  outline: none;
+}
+
+/* Các mục trượt vào lần lượt (stagger) */
+.menu__list li,
+.menu__info {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.3s ease, transform 0.3s ease;   /* lúc đóng: biến mất nhanh */
+}
+
+.menu-open .menu__list li,
+.menu-open .menu__info {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.5s ease calc(0.25s + var(--i, 0) * 0.07s),
+    transform 0.6s var(--ease-out) calc(0.25s + var(--i, 0) * 0.07s);
+}
+
+.menu__list li:nth-child(1) { --i: 0; }
+.menu__list li:nth-child(2) { --i: 1; }
+.menu__list li:nth-child(3) { --i: 2; }
+.menu__list li:nth-child(4) { --i: 3; }
+.menu__list li:nth-child(5) { --i: 4; }
+.menu__info { --i: 5; }
+
+.menu__info {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.menu__info p { margin: 0 0 4px; }
+.menu__info .btn { margin-top: 16px; }
+
+/* ============ NÚT (HOVER NÂNG 3PX) ============ */
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  background: var(--accent);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.3s var(--ease-spring),
+    box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* ============ NỘI DUNG TRANG MẪU ============ */
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 100px max(24px, 6vw) 60px;
+  background:
+    radial-gradient(circle at 75% 35%, rgba(180, 83, 9, 0.4), transparent 55%),
+    var(--bg);
+}
+
+.tag {
+  margin: 0 0 8px;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.hero h1 {
+  margin: 0 0 14px;
+  font-size: clamp(44px, 9vw, 88px);
+  line-height: 1.05;
+}
+
+.desc {
+  max-width: 480px;
+  margin: 0 0 28px;
+  font-size: 18px;
+  color: var(--muted);
+}
+
+.section {
+  padding: 90px max(24px, 6vw);
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.section h2 {
+  margin: 0 0 8px;
+  font-size: clamp(26px, 5vw, 40px);
+}
+
+.sub {
+  max-width: 560px;
+  margin: 0 auto;
+  color: var(--muted);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  width: min(100%, 1000px);
+  margin: 40px auto 0;
+}
+
+.card {
+  padding: 26px 22px;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+}
+
+.card h3 { margin: 0 0 6px; font-size: 19px; }
+.card p  { margin: 0 0 14px; font-size: 14px; color: var(--muted); }
+.card b  { font-size: 18px; color: var(--gold); }
+
+.footer {
+  padding: 32px 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  background: #140e0b;
+}
+
+/* ============ TRUY CẬP: GIẢM CHUYỂN ĐỘNG ============ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .burger,
+  .burger__bar,
+  .menu,
+  .menu__list li,
+  .menu__info,
+  .menu__list a,
+  .btn {
+    transition-duration: 0.01s !important;
+    transition-delay: 0s !important;
+  }
+}
