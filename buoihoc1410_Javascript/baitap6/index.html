@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111513">
+  <title>Kiểm tra tam giác đều | Bài 6 JavaScript</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="page-heading">
+      <a class="home-link" href="../index.html"><span aria-hidden="true">←</span>Trang chủ bài tập</a>
+      <div class="lesson-tag"><span class="lesson-mark" aria-hidden="true">JS</span>BÀI THỰC HÀNH 06</div>
+      <h1>Kiểm tra <span>tam giác đều</span></h1>
+      <p>Nhập ba cạnh để kiểm tra tam giác đều và theo dõi từng bước JavaScript</p>
+    </header>
+
+    <section class="triangle-checker" aria-label="Công cụ kiểm tra tam giác đều">
+      <div class="checker-topline">
+        <span class="checker-label"><span class="status-dot" aria-hidden="true"></span>SO SÁNH ĐỘ DÀI BA CẠNH</span>
+        <span class="checker-mark" aria-hidden="true">△</span>
+      </div>
+
+      <div class="checker-layout">
+        <form id="triangleForm" novalidate>
+          <div class="side-fields">
+            <div class="side-field">
+              <label for="sideAInput">Cạnh a</label>
+              <div class="input-field">
+                <input
+                  id="sideAInput"
+                  name="sideA"
+                  type="text"
+                  inputmode="decimal"
+                  autocomplete="off"
+                  placeholder="Ví dụ: 5"
+                  aria-describedby="inputHint errorMessage"
+                  aria-invalid="false"
+                >
+              </div>
+            </div>
+            <div class="side-field">
+              <label for="sideBInput">Cạnh b</label>
+              <div class="input-field">
+                <input
+                  id="sideBInput"
+                  name="sideB"
+                  type="text"
+                  inputmode="decimal"
+                  autocomplete="off"
+                  placeholder="Ví dụ: 5"
+                  aria-describedby="inputHint errorMessage"
+                  aria-invalid="false"
+                >
+              </div>
+            </div>
+            <div class="side-field">
+              <label for="sideCInput">Cạnh c</label>
+              <div class="input-field">
+                <input
+                  id="sideCInput"
+                  name="sideC"
+                  type="text"
+                  inputmode="decimal"
+                  autocomplete="off"
+                  placeholder="Ví dụ: 5"
+                  aria-describedby="inputHint errorMessage"
+                  aria-invalid="false"
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="field-hint" id="inputHint">Các cạnh phải lớn hơn 0 và ghép thành một tam giác.</div>
+          <p class="error-message" id="errorMessage" role="alert" aria-live="polite"></p>
+          <button class="check-button" type="submit">
+            <span>Kiểm tra tam giác</span>
+            <span class="button-arrow" aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <section class="result-panel" aria-label="Kết quả kiểm tra">
+          <div class="result-topline">
+            <span class="result-label">KẾT QUẢ</span>
+            <span class="result-mark" aria-hidden="true">△</span>
+          </div>
+          <p class="result-message" id="triangleResult" role="status" aria-live="polite">Nhập ba cạnh để bắt đầu kiểm tra.</p>
+          <figure class="triangle-figure" id="triangleFigure" hidden>
+            <svg viewBox="0 0 400 280" role="img" aria-labelledby="triangleSvgTitle triangleSvgDescription">
+              <title id="triangleSvgTitle">Hình minh họa tam giác</title>
+              <desc id="triangleSvgDescription">Hình minh họa ba cạnh a, b và c.</desc>
+              <polygon id="triangleShape" class="triangle-shape" points="200,25 70,250 330,250"></polygon>
+              <text id="sideALabel" class="side-label" x="115" y="145">a</text>
+              <text id="sideBLabel" class="side-label" x="285" y="145">b</text>
+              <text id="sideCLabel" class="side-label" x="200" y="270">c</text>
+            </svg>
+            <figcaption class="figure-tag" id="figureTag">TAM GIÁC ĐỀU</figcaption>
+          </figure>
+        </section>
+      </div>
+    </section>
+
+    <section class="simulation-panel" id="simulationPanel" aria-labelledby="simulationHeading" hidden>
+      <header class="simulation-header">
+        <div>
+          <div class="simulation-kicker">MÔ PHỎNG TỪNG BƯỚC</div>
+          <h2 id="simulationHeading">Quá trình thực thi JavaScript</h2>
+        </div>
+        <div class="simulation-controls" aria-label="Điều khiển mô phỏng">
+          <button class="simulation-button primary-control" id="startSimulation" type="button" disabled>Bắt đầu mô phỏng</button>
+          <button class="simulation-button" id="previousStep" type="button" disabled>Quay lại</button>
+          <button class="simulation-button" id="nextStep" type="button" disabled>Bước tiếp theo</button>
+          <button class="simulation-button" id="autoSimulation" type="button" disabled>Chạy tự động</button>
+          <button class="simulation-button" id="restartSimulation" type="button" disabled>Chạy lại</button>
+        </div>
+      </header>
+
+      <div class="simulation-workspace">
+        <div class="code-workspace">
+          <div class="code-toolbar">
+            <span class="code-indicator" aria-hidden="true"></span>
+            <span>triangle-check.js</span>
+          </div>
+          <ol class="code-list" id="simulationCode" aria-label="Mã JavaScript được mô phỏng"></ol>
+        </div>
+
+        <section class="step-workspace" id="stepWorkspace" aria-live="polite" aria-atomic="true" aria-label="Bước mô phỏng hiện tại">
+          <div class="step-counter" id="stepCounter">SẴN SÀNG</div>
+          <h3 id="stepTitle">Chuẩn bị dữ liệu</h3>
+          <p class="step-expression"><code id="stepExpression">Nhập ba cạnh hợp lệ rồi nhấn “Kiểm tra tam giác”.</code></p>
+          <p class="step-explanation" id="stepExplanation">Mã và các bước thực thi sẽ được tạo từ chính những giá trị bạn nhập.</p>
+        </section>
+      </div>
+    </section>
+
+    <footer>SO SÁNH BA CẠNH <span aria-hidden="true">·</span> a = b = c</footer>
+  </main>
+</body>
+</html>

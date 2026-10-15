@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111513">
+  <title>Kiểm tra số chẵn/lẻ | Bài 2 JavaScript</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="page-heading">
+      <a class="home-link" href="../index.html"><span aria-hidden="true">←</span>Trang chủ bài tập</a>
+      <div class="lesson-tag"><span class="lesson-mark" aria-hidden="true">JS</span>BÀI THỰC HÀNH 02</div>
+      <h1>Kiểm tra số <span>chẵn/lẻ</span></h1>
+      <p>Nhập một số nguyên để xác định đó là số chẵn hay số lẻ</p>
+    </header>
+
+    <section class="checker" aria-label="Công cụ kiểm tra số chẵn lẻ">
+      <div class="check-layout">
+        <form id="checkForm" novalidate>
+          <label for="integerInput">Số nguyên cần kiểm tra</label>
+          <div class="number-field">
+            <span class="number-symbol" aria-hidden="true">#</span>
+            <input
+              id="integerInput"
+              name="integerInput"
+              type="text"
+              inputmode="numeric"
+              autocomplete="off"
+              placeholder="Ví dụ: -8 hoặc 0"
+              aria-describedby="inputHint errorMessage"
+              aria-invalid="false"
+            >
+          </div>
+          <div class="field-hint" id="inputHint">Chấp nhận số nguyên âm, số 0 và số nguyên dương.</div>
+          <p class="error-message" id="errorMessage" role="alert" aria-live="polite"></p>
+          <button class="check-button" type="submit">
+            <span>Kiểm tra</span>
+            <span class="button-arrow" aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <div class="result-panel" id="resultPanel" aria-live="polite" aria-atomic="true">
+          <div class="result-topline">
+            <span class="result-label">KẾT QUẢ KIỂM TRA</span>
+            <span class="result-mark" id="resultMark" aria-hidden="true">%</span>
+          </div>
+          <output class="result-value" id="resultValue" for="integerInput">—</output>
+          <div class="result-caption" id="resultCaption">Nhập số nguyên rồi nhấn Kiểm tra</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>PHÉP CHIA LẤY DƯ <span aria-hidden="true">·</span> TOÁN TỬ %</footer>
+  </main>
+</body>
+</html>

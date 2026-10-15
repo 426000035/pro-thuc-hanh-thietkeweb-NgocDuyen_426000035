@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111513">
+  <title>Đăng nhập | Bài 4 JavaScript</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="page-heading">
+      <a class="home-link" href="../index.html"><span aria-hidden="true">←</span>Trang chủ bài tập</a>
+      <div class="lesson-tag"><span class="lesson-mark" aria-hidden="true">JS</span>BÀI THỰC HÀNH 04</div>
+      <h1>Đăng <span>nhập</span></h1>
+      <p>Nhập thông tin để kiểm tra đăng nhập</p>
+    </header>
+
+    <section class="login-card" aria-label="Biểu mẫu đăng nhập mô phỏng">
+      <div class="card-topline">
+        <span class="card-label"><span class="status-dot" aria-hidden="true"></span>KIỂM TRA TÀI KHOẢN</span>
+        <span class="card-mark" aria-hidden="true">04</span>
+      </div>
+
+      <form id="loginForm" novalidate>
+        <div class="field-group">
+          <label for="usernameInput">Tên đăng nhập</label>
+          <div class="input-field">
+            <span class="input-symbol" aria-hidden="true">@</span>
+            <input
+              id="usernameInput"
+              name="username"
+              type="text"
+              autocomplete="username"
+              placeholder="Nhập tên đăng nhập"
+              aria-describedby="resultMessage"
+            >
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="passwordInput">Mật khẩu</label>
+          <div class="input-field">
+            <span class="input-symbol password-symbol" aria-hidden="true">●</span>
+            <input
+              id="passwordInput"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Nhập mật khẩu"
+              aria-describedby="resultMessage"
+            >
+          </div>
+        </div>
+
+        <div class="result-slot">
+          <p class="result-message" id="resultMessage" role="status" aria-live="polite"></p>
+        </div>
+
+        <button class="login-button" type="submit">
+          <span>Đăng nhập</span>
+          <span class="button-arrow" aria-hidden="true">→</span>
+        </button>
+      </form>
+    </section>
+
+    <footer>JAVASCRIPT <span aria-hidden="true">·</span> LOGIC ĐĂNG NHẬP MÔ PHỎNG</footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#111513">
+	<title>Buổi học ngày 14/10/2026 | JavaScript</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			color-scheme: dark;
+			--page: #111513;
+			--surface: #191f1b;
+			--surface-raised: #202722;
+			--text: #f1f4ed;
+			--muted: #a2aaa1;
+			--line: rgba(229, 239, 222, 0.1);
+			--yellow: #f5df4d;
+			--green: #9bd6a8;
+			--coral: #efa58a;
+			--shadow: 0 18px 40px rgba(0, 0, 0, 0.22), 0 3px 10px rgba(0, 0, 0, 0.15);
+		}
+
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+		}
+
+		body {
+			min-width: 320px;
+			min-height: 100vh;
+			margin: 0;
+			overflow-x: hidden;
+			background:
+				radial-gradient(ellipse at 12% 8%, rgba(109, 154, 111, 0.13), transparent 33rem),
+				radial-gradient(ellipse at 92% 43%, rgba(205, 180, 75, 0.09), transparent 29rem),
+				var(--page);
+			color: var(--text);
+			font-family: "Roboto", sans-serif;
+			-webkit-font-smoothing: antialiased;
+		}
+
+		body::before {
+			position: fixed;
+			z-index: -1;
+			inset: 0;
+			background-image: linear-gradient(rgba(231, 239, 226, 0.025) 1px, transparent 1px),
+				linear-gradient(90deg, rgba(231, 239, 226, 0.025) 1px, transparent 1px);
+			background-size: 48px 48px;
+			content: "";
+			mask-image: linear-gradient(to bottom, black, transparent 80%);
+			pointer-events: none;
+		}
+
+		.page-shell {
+			width: min(1120px, calc(100% - 64px));
+			margin: 0 auto;
+			padding: 64px 0 56px;
+		}
+
+		.topline {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding-bottom: 22px;
+			border-bottom: 1px solid var(--line);
+			color: #c1c8bd;
+			font-size: 12px;
+			font-weight: 700;
+			letter-spacing: 1.2px;
+		}
+
+		.brand {
+			display: inline-flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.brand-mark {
+			display: grid;
+			width: 29px;
+			height: 29px;
+			place-items: center;
+			border-radius: 8px;
+			background: var(--yellow);
+			color: #202113;
+			font-size: 16px;
+			font-weight: 800;
+			letter-spacing: 0;
+		}
+
+		.topline-note {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			color: var(--muted);
+			font-size: 11px;
+			letter-spacing: 1px;
+		}
+
+		.status-dot {
+			width: 7px;
+			height: 7px;
+			border-radius: 50%;
+			background: var(--green);
+			box-shadow: 0 0 12px rgba(155, 214, 168, 0.65);
+		}
+
+		.hero {
+			position: relative;
+			padding: 70px 0 52px;
+			animation: rise-in 700ms both;
+		}
+
+		.eyebrow {
+			display: inline-flex;
+			align-items: center;
+			gap: 9px;
+			margin-bottom: 20px;
+			color: var(--yellow);
+			font-size: 11px;
+			font-weight: 700;
+			letter-spacing: 1.65px;
+		}
+
+		.eyebrow::before {
+			width: 20px;
+			height: 1px;
+			background: currentColor;
+			content: "";
+		}
+
+		h1 {
+			max-width: 850px;
+			margin: 0;
+			font-size: clamp(38px, 5vw, 60px);
+			font-weight: 700;
+			line-height: 1.08;
+		}
+
+		h1 span {
+			color: var(--yellow);
+		}
+
+		.hero-bottom {
+			display: flex;
+			align-items: end;
+			justify-content: space-between;
+			gap: 24px;
+			margin-top: 20px;
+		}
+
+		.hero-bottom p {
+			margin: 0;
+			color: var(--muted);
+			font-size: 16px;
+			line-height: 1.6;
+		}
+
+		.count-badge {
+			flex: none;
+			padding: 9px 12px;
+			border: 1px solid rgba(245, 223, 77, 0.25);
+			border-radius: 6px;
+			background: rgba(245, 223, 77, 0.06);
+			color: var(--yellow);
+			font-size: 11px;
+			font-weight: 700;
+			letter-spacing: 1px;
+		}
+
+		.section-heading {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 17px;
+		}
+
+		.section-heading h2 {
+			margin: 0;
+			font-size: 14px;
+			font-weight: 600;
+		}
+
+		.section-heading span {
+			color: #737e74;
+			font-size: 11px;
+			letter-spacing: 0.7px;
+		}
+
+		.exercise-grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 16px;
+			perspective: 1000px;
+		}
+
+		.exercise-card {
+			--pointer-x: 50%;
+			--pointer-y: 50%;
+			--card-accent: var(--yellow);
+			position: relative;
+			display: flex;
+			min-height: 212px;
+			flex-direction: column;
+			overflow: hidden;
+			padding: 22px;
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			background: linear-gradient(145deg, rgba(34, 42, 36, 0.98), rgba(25, 31, 27, 0.98));
+			box-shadow: var(--shadow);
+			color: inherit;
+			text-decoration: none;
+			transform: translateY(14px);
+			translate: 0 0;
+			scale: 1;
+			opacity: 0;
+			animation: card-in 650ms cubic-bezier(0.2, 0.75, 0.25, 1) forwards;
+			animation-delay: var(--reveal-delay, 0ms);
+			transition: translate 240ms ease, scale 240ms ease, border-color 240ms ease, box-shadow 240ms ease, background 240ms ease;
+			will-change: transform;
+		}
+
+		.exercise-card::before {
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(250px circle at var(--pointer-x) var(--pointer-y), rgba(245, 223, 77, 0.11), transparent 65%);
+			content: "";
+			opacity: 0;
+			pointer-events: none;
+			transition: opacity 220ms ease;
+		}
+
+		.exercise-card:nth-child(2) { --card-accent: var(--green); }
+		.exercise-card:nth-child(3) { --card-accent: #e9ae7d; }
+		.exercise-card:nth-child(4) { --card-accent: #9cc9db; }
+		.exercise-card:nth-child(5) { --card-accent: var(--coral); }
+		.exercise-card:nth-child(6) { --card-accent: #c2b0db; }
+
+		.exercise-card:nth-child(1) { --reveal-delay: 100ms; }
+		.exercise-card:nth-child(2) { --reveal-delay: 170ms; }
+		.exercise-card:nth-child(3) { --reveal-delay: 240ms; }
+		.exercise-card:nth-child(4) { --reveal-delay: 310ms; }
+		.exercise-card:nth-child(5) { --reveal-delay: 380ms; }
+		.exercise-card:nth-child(6) { --reveal-delay: 450ms; }
+
+		.card-top,
+		.card-content,
+		.card-bottom {
+			position: relative;
+			z-index: 1;
+		}
+
+		.card-top,
+		.card-bottom {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.card-number {
+			color: var(--card-accent);
+			font-size: 13px;
+			font-weight: 700;
+			letter-spacing: 1px;
+			transition: transform 240ms ease;
+		}
+
+		.card-symbol {
+			display: grid;
+			width: 40px;
+			height: 40px;
+			place-items: center;
+			border: 1px solid color-mix(in srgb, var(--card-accent) 23%, transparent);
+			border-radius: 10px;
+			background: color-mix(in srgb, var(--card-accent) 9%, transparent);
+			color: var(--card-accent);
+			font-size: 17px;
+			font-weight: 700;
+			transition: transform 240ms ease, background 240ms ease;
+		}
+
+		.card-content {
+			margin-top: auto;
+			padding: 25px 0 21px;
+		}
+
+		.card-content h3 {
+			max-width: 270px;
+			margin: 0;
+			font-size: 19px;
+			font-weight: 600;
+			line-height: 1.35;
+		}
+
+		.card-bottom {
+			padding-top: 13px;
+			border-top: 1px solid rgba(229, 239, 222, 0.08);
+			color: #8f998f;
+			font-size: 11px;
+		}
+
+		.card-arrow {
+			color: var(--card-accent);
+			font-size: 17px;
+			transition: transform 220ms ease;
+		}
+
+		.exercise-card:hover {
+			z-index: 2;
+			border-color: color-mix(in srgb, var(--card-accent) 53%, transparent);
+			background: linear-gradient(145deg, #28322a, #1b211d);
+			box-shadow: 0 27px 54px rgba(0, 0, 0, 0.38), 0 0 24px color-mix(in srgb, var(--card-accent) 12%, transparent);
+			translate: 0 -9px;
+			scale: 1.025;
+		}
+
+		.exercise-card:hover,
+		.exercise-card:focus-visible {
+			animation-name: card-in, card-flutter;
+			animation-duration: 650ms, 2.8s;
+			animation-timing-function: cubic-bezier(0.2, 0.75, 0.25, 1), ease-in-out;
+			animation-delay: var(--reveal-delay, 0ms), 0s;
+			animation-iteration-count: 1, infinite;
+			animation-fill-mode: forwards, none;
+		}
+
+		.exercise-card:hover::before,
+		.exercise-card:focus-visible::before {
+			opacity: 1;
+		}
+
+		.exercise-card:hover .card-number {
+			transform: translateX(3px) scale(1.08);
+		}
+
+		.exercise-card:hover .card-symbol {
+			background: color-mix(in srgb, var(--card-accent) 15%, transparent);
+			transform: rotate(-6deg) translateY(-2px);
+		}
+
+		.exercise-card:hover .card-arrow {
+			transform: translateX(4px);
+		}
+
+		.exercise-card:focus-visible {
+			z-index: 3;
+			outline: 2px solid var(--yellow);
+			outline-offset: 4px;
+			border-color: var(--yellow);
+		}
+
+		.exercise-card:active {
+			translate: 0 -3px;
+			scale: 0.99;
+		}
+
+		footer {
+			display: flex;
+			justify-content: space-between;
+			gap: 16px;
+			margin-top: 30px;
+			padding-top: 18px;
+			border-top: 1px solid var(--line);
+			color: #737e74;
+			font-size: 11px;
+		}
+
+		@keyframes rise-in {
+			from { transform: translateY(12px); opacity: 0; }
+			to { transform: translateY(0); opacity: 1; }
+		}
+
+		@keyframes card-in {
+			to { transform: translateY(0); opacity: 1; }
+		}
+
+		@keyframes card-flutter {
+			0%, 100% { rotate: -0.25deg; }
+			50% { rotate: 0.25deg; }
+		}
+
+		@media (max-width: 850px) {
+			.page-shell { width: min(700px, calc(100% - 48px)); padding-top: 44px; }
+			.hero { padding: 58px 0 42px; }
+			.exercise-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+		}
+
+		@media (max-width: 560px) {
+			.page-shell { width: calc(100% - 36px); padding: 26px 0 32px; }
+			.topline { padding-bottom: 17px; }
+			.topline-note { font-size: 9px; }
+			.hero { padding: 48px 0 34px; }
+			h1 { font-size: 38px; }
+			.hero-bottom { align-items: start; flex-direction: column; gap: 15px; }
+			.hero-bottom p { font-size: 15px; }
+			.exercise-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+			.exercise-card { min-height: 184px; padding: 19px; }
+			.card-content { padding: 20px 0 17px; }
+			footer { flex-direction: column; gap: 7px; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			*,
+			*::before,
+			*::after {
+				scroll-behavior: auto !important;
+				animation-duration: 0.01ms !important;
+				animation-iteration-count: 1 !important;
+				transition-duration: 0.01ms !important;
+			}
+
+			.exercise-card { transform: none; translate: none; scale: none; opacity: 1; }
+		}
+	</style>
+</head>
+<body>
+	<main class="page-shell">
+		<div class="topline" aria-label="Thông tin khóa học">
+			<div class="brand"><span class="brand-mark" aria-hidden="true">JS</span><span>LEARNING LAB</span></div>
+			<div class="topline-note"><span class="status-dot" aria-hidden="true"></span>BUỔI THỰC HÀNH</div>
+		</div>
+
+		<header class="hero">
+			<div class="eyebrow">JAVASCRIPT PRACTICE</div>
+			<h1>Buổi học ngày <span>14/10/2026</span></h1>
+			<div class="hero-bottom">
+				<p>Chủ đề: JavaScript<br>Danh sách bài tập thực hành</p>
+				<div class="count-badge">06 EXERCISES</div>
+			</div>
+		</header>
+
+		<section aria-labelledby="exercise-heading">
+			<div class="section-heading">
+				<h2 id="exercise-heading">Bài tập trong buổi học</h2>
+				<span>CHỌN MỘT BÀI ĐỂ BẮT ĐẦU</span>
+			</div>
+			<div class="exercise-grid">
+				<a class="exercise-card" href="baitap1/index.html" aria-label="Bài 1: Chuyển đổi tiền tệ đơn giản">
+					<div class="card-top"><span class="card-number">01 / 06</span><span class="card-symbol" aria-hidden="true">↔</span></div>
+					<div class="card-content"><h3>Bài 1: Chuyển đổi tiền tệ đơn giản</h3></div>
+					<div class="card-bottom"><span>Currency converter</span><span class="card-arrow" aria-hidden="true">↗</span></div>
+				</a>
+				<a class="exercise-card" href="baitap2/index.html" aria-label="Bài 2: Kiểm tra số chẵn/lẻ">
+					<div class="card-top"><span class="card-number">02 / 06</span><span class="card-symbol" aria-hidden="true">±</span></div>
+					<div class="card-content"><h3>Bài 2: Kiểm tra số chẵn/lẻ</h3></div>
+					<div class="card-bottom"><span>Number logic</span><span class="card-arrow" aria-hidden="true">↗</span></div>
+				</a>
+				<a class="exercise-card" href="baitap3/index.html" aria-label="Bài 3: Tính chỉ số BMI cơ bản">
+					<div class="card-top"><span class="card-number">03 / 06</span><span class="card-symbol" aria-hidden="true">BMI</span></div>
+					<div class="card-content"><h3>Bài 3: Tính chỉ số BMI cơ bản</h3></div>
+					<div class="card-bottom"><span>Health metrics</span><span class="card-arrow" aria-hidden="true">↗</span></div>
+				</a>
+				<a class="exercise-card" href="baitap4/index.html" aria-label="Bài 4: Logic Đăng nhập (Mô phỏng)">
+					<div class="card-top"><span class="card-number">04 / 06</span><span class="card-symbol" aria-hidden="true">&gt;_</span></div>
+					<div class="card-content"><h3>Bài 4: Logic Đăng nhập (Mô phỏng)</h3></div>
+					<div class="card-bottom"><span>Conditional flow</span><span class="card-arrow" aria-hidden="true">↗</span></div>
+				</a>
+				<a class="exercise-card" href="baitap5/index.html" aria-label="Bài 5: Máy tính giảm giá (Discount Calculator)">
+					<div class="card-top"><span class="card-number">05 / 06</span><span class="card-symbol" aria-hidden="true">%</span></div>
+					<div class="card-content"><h3>Bài 5: Máy tính giảm giá (Discount Calculator)</h3></div>
+					<div class="card-bottom"><span>Discount calculator</span><span class="card-arrow" aria-hidden="true">↗</span></div>
+				</a>
+				<a class="exercise-card" href="baitap6/index.html" aria-label="Bài 6: Phân loại tam giác">
+					<div class="card-top"><span class="card-number">06 / 06</span><span class="card-symbol" aria-hidden="true">△</span></div>
+					<div class="card-content"><h3>Bài 6: Phân loại tam giác</h3></div>
+					<div class="card-bottom"><span>Shape classification</span><span class="card-arrow" aria-hidden="true">↗</span></div>
+				</a>
+			</div>
+		</section>
+
+		<footer><span>JAVASCRIPT · BUỔI HỌC 14.10.2026</span><span>THỰC HÀNH LẬP TRÌNH</span></footer>
+	</main>
+
+	<script>
+		// Cập nhật vị trí ánh sáng bên trong từng thẻ mà không can thiệp vào điều hướng liên kết.
+		document.querySelectorAll(".exercise-card").forEach((card) => {
+			card.addEventListener("pointermove", (event) => {
+				if (event.pointerType !== "mouse") return;
+
+				const bounds = card.getBoundingClientRect();
+				const x = ((event.clientX - bounds.left) / bounds.width) * 100;
+				const y = ((event.clientY - bounds.top) / bounds.height) * 100;
+				card.style.setProperty("--pointer-x", `${x}%`);
+				card.style.setProperty("--pointer-y", `${y}%`);
+			});
+		});
+	</script>
+</body>
+</html>

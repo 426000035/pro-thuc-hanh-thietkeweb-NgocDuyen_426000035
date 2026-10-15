@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111513">
+  <title>Tính chỉ số BMI | Bài 3 JavaScript</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="page-heading">
+      <a class="home-link" href="../index.html"><span aria-hidden="true">←</span>Trang chủ bài tập</a>
+      <div class="lesson-tag"><span class="lesson-mark" aria-hidden="true">JS</span>BÀI THỰC HÀNH 03</div>
+      <h1>Tính chỉ số <span>BMI</span></h1>
+      <p>Nhập chiều cao và cân nặng để tính chỉ số BMI</p>
+    </header>
+
+    <section class="calculator" aria-label="Công cụ tính chỉ số BMI">
+      <div class="calculator-topline">
+        <span class="calculator-label"><span class="status-dot" aria-hidden="true"></span>CHỈ SỐ KHỐI CƠ THỂ</span>
+        <span class="formula">CÂN NẶNG / CHIỀU CAO²</span>
+      </div>
+
+      <div class="calculator-layout">
+        <form id="bmiForm" novalidate>
+          <div class="field-group">
+            <label for="heightInput">Chiều cao</label>
+            <div class="input-field">
+              <span class="input-symbol" aria-hidden="true">↕</span>
+              <input
+                id="heightInput"
+                name="height"
+                type="text"
+                inputmode="decimal"
+                autocomplete="off"
+                placeholder="Ví dụ: 1.75"
+                aria-describedby="heightHint errorMessage"
+                aria-invalid="false"
+              >
+              <span class="unit-label">M</span>
+            </div>
+            <div class="field-hint" id="heightHint">Chiều cao tính bằng mét.</div>
+          </div>
+
+          <div class="field-group weight-group">
+            <label for="weightInput">Cân nặng</label>
+            <div class="input-field">
+              <span class="input-symbol weight-symbol" aria-hidden="true">＋</span>
+              <input
+                id="weightInput"
+                name="weight"
+                type="text"
+                inputmode="decimal"
+                autocomplete="off"
+                placeholder="Ví dụ: 70"
+                aria-describedby="weightHint errorMessage"
+                aria-invalid="false"
+              >
+              <span class="unit-label">KG</span>
+            </div>
+            <div class="field-hint" id="weightHint">Cân nặng tính bằng kilôgam.</div>
+          </div>
+
+          <p class="error-message" id="errorMessage" role="alert" aria-live="polite"></p>
+          <button class="calculate-button" type="submit">
+            <span>Tính BMI</span>
+            <span class="button-arrow" aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <div class="result-panel" aria-live="polite" aria-atomic="true">
+          <div class="result-topline">
+            <span class="result-label">CHỈ SỐ BMI CỦA BẠN</span>
+            <span class="result-mark" aria-hidden="true">BMI</span>
+          </div>
+          <output class="result-value" id="bmiResult" for="heightInput weightInput">—</output>
+          <div class="result-caption" id="resultCaption">Kết quả sẽ hiển thị tại đây</div>
+          <div class="result-equation" id="resultEquation" aria-hidden="true">kg / m²</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>CHỈ SỐ KHỐI CƠ THỂ <span aria-hidden="true">·</span> BMI = KG / M²</footer>
+  </main>
+</body>
+</html>

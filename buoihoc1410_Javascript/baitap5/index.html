@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111513">
+  <title>Máy tính giảm giá | Bài 5 JavaScript</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="page-heading">
+      <a class="home-link" href="../index.html"><span aria-hidden="true">←</span>Trang chủ bài tập</a>
+      <div class="lesson-tag"><span class="lesson-mark" aria-hidden="true">JS</span>BÀI THỰC HÀNH 05</div>
+      <h1>Máy tính <span>giảm giá</span></h1>
+      <p>Nhập số tiền hóa đơn để tính số tiền phải trả</p>
+    </header>
+
+    <section class="discount-calculator" aria-label="Công cụ tính số tiền sau giảm giá">
+      <div class="calculator-topline">
+        <span class="calculator-label"><span class="status-dot" aria-hidden="true"></span>ƯU ĐÃI HÓA ĐƠN</span>
+        <span class="discount-badge">−10%</span>
+      </div>
+
+      <div class="calculator-layout">
+        <form id="discountForm" novalidate>
+          <label for="billAmount">Số tiền hóa đơn</label>
+          <div class="amount-field">
+            <span class="currency-symbol" aria-hidden="true">₫</span>
+            <input
+              id="billAmount"
+              name="billAmount"
+              type="text"
+              inputmode="decimal"
+              autocomplete="off"
+              placeholder="Ví dụ: 600000"
+              aria-describedby="inputHint errorMessage"
+              aria-invalid="false"
+            >
+            <span class="currency-code">VND</span>
+          </div>
+          <div class="field-hint" id="inputHint">Hóa đơn trên 500.000 VND được giảm 10%.</div>
+          <p class="error-message" id="errorMessage" role="alert" aria-live="polite"></p>
+          <button class="calculate-button" type="submit">
+            <span>Tính giảm giá</span>
+            <span class="button-arrow" aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <div class="result-panel" aria-live="polite" aria-atomic="true">
+          <div class="result-topline">
+            <span class="result-label">CHI TIẾT THANH TOÁN</span>
+            <span class="result-mark" aria-hidden="true">%</span>
+          </div>
+          <dl class="result-list">
+            <div class="result-row">
+              <dt>Hóa đơn ban đầu</dt>
+              <dd id="originalAmount">—</dd>
+            </div>
+            <div class="result-row">
+              <dt>Mức giảm giá</dt>
+              <dd id="discountRate">—</dd>
+            </div>
+            <div class="result-row discount-row">
+              <dt>Tiền được giảm</dt>
+              <dd id="discountAmount">—</dd>
+            </div>
+            <div class="result-row total-row">
+              <dt>Cần thanh toán</dt>
+              <dd id="finalAmount">—</dd>
+            </div>
+          </dl>
+          <div class="result-caption" id="resultCaption">Kết quả sẽ hiển thị tại đây</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>GIẢM 10% KHI HÓA ĐƠN TRÊN 500.000 VND</footer>
+  </main>
+</body>
+</html>

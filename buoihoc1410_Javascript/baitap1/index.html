@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111513">
+  <title>Chuyển đổi tiền tệ | Bài 1 JavaScript</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="page-heading">
+      <a class="home-link" href="../index.html"><span aria-hidden="true">←</span>Trang chủ bài tập</a>
+      <div class="lesson-tag"><span class="lesson-mark" aria-hidden="true">JS</span>BÀI THỰC HÀNH 01</div>
+      <h1>Chuyển đổi <span>tiền tệ</span></h1>
+      <p>Quy đổi USD sang VND</p>
+    </header>
+
+    <section class="converter" aria-label="Công cụ chuyển đổi USD sang VND">
+      <div class="rate-row">
+        <span class="rate-label"><span class="rate-dot" aria-hidden="true"></span>TỶ GIÁ CỐ ĐỊNH</span>
+        <strong>1 USD <span aria-hidden="true">=</span> 25.000 VND</strong>
+      </div>
+
+      <div class="conversion-layout">
+        <form id="conversionForm" novalidate>
+          <label for="usdAmount">Số tiền muốn chuyển đổi</label>
+          <div class="amount-field">
+            <span class="currency-symbol" aria-hidden="true">$</span>
+            <input
+              id="usdAmount"
+              name="usdAmount"
+              type="text"
+              inputmode="decimal"
+              autocomplete="off"
+              placeholder="Ví dụ: 100.50"
+              aria-describedby="inputHint errorMessage"
+              aria-invalid="false"
+            >
+            <span class="currency-code">USD</span>
+          </div>
+          <div class="field-hint" id="inputHint">Có thể nhập số thập phân, dùng dấu chấm.</div>
+          <p class="error-message" id="errorMessage" role="alert" aria-live="polite"></p>
+          <button class="convert-button" type="submit">
+            <span>Chuyển đổi</span>
+            <span class="button-arrow" aria-hidden="true">→</span>
+          </button>
+        </form>
+
+        <div class="result-panel" aria-live="polite" aria-atomic="true">
+          <div class="result-topline">
+            <span class="result-label">SỐ TIỀN VND</span>
+            <span class="result-mark" aria-hidden="true">₫</span>
+          </div>
+          <output class="result-value" id="vndResult" for="usdAmount">—</output>
+          <div class="result-caption" id="resultCaption">Kết quả sẽ hiển thị tại đây</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>USD <span aria-hidden="true">→</span> VND <span class="footer-divider" aria-hidden="true">·</span> TỶ GIÁ 25.000 VND/USD</footer>
+  </main>
+</body>
+</html>

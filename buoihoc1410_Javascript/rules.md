@@ -1,0 +1,5 @@
+Luôn luôn thêm comment vào javascript code của bạn để giải thích các phần quan trọng và logic của chương trình. Điều này sẽ giúp người khác (và cả bạn trong tương lai) dễ dàng hiểu và bảo trì mã nguồn.
+Dùng html và css, javascript để tạo giao diện người dùng thân thiện và trực quan. Hãy chắc chắn rằng các phần tử HTML được đặt tên rõ ràng và có cấu trúc hợp lý, đồng thời sử dụng CSS để tạo kiểu dáng đẹp mắt và dễ nhìn.
+Dùng javascript để làm logic cho ứng dụng của bạn. Hãy chắc chắn rằng mã javascript của bạn được tổ chức tốt, dễ đọc và dễ bảo trì. Sử dụng các hàm, biến và cấu trúc điều khiển hợp lý để làm cho mã của bạn rõ ràng và hiệu quả.
+Style và bố cục của giao diện người dùng nên được thiết kế sao cho dễ sử dụng và trực quan. Hãy cân nhắc đến trải nghiệm người dùng (UX) và đảm bảo rằng các phần tử giao diện được sắp xếp hợp lý, dễ tìm kiếm và dễ tương tác.
+Style giao diện hiện đại và hấp dẫn để thu hút người dùng. Sử dụng màu sắc nổi bật, font chữ Roboto mặc định và hình ảnh một cách hợp lý để tạo ra một giao diện đẹp mắt và chuyên nghiệp.
