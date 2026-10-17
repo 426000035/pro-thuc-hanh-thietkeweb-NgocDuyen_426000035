@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+    padding: 20px;
+}
+
+.gallery-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.gallery-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* --- Bố cục Grid --- */
+.gallery {
+    display: grid;
+    /* Tự động điền cột, mỗi cột rộng tối thiểu 200px */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: 200px; /* Chiều cao mặc định của một hàng */
+    grid-auto-flow: dense; /* Tự động lấp đầy khoảng trống (như Pinterest/Instagram) */
+    gap: 15px; /* Khoảng cách đồng nhất giữa các ảnh */
+}
+
+/* --- Định dạng từng ảnh --- */
+.gallery-item {
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Giữ tỷ lệ ảnh mà không bị méo */
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05); /* Hiệu ứng phóng to khi hover */
+}
+
+/* --- Tạo kích thước ảnh to nhỏ đan xen bằng span --- */
+
+/* Ảnh chiếm 2 cột, 2 hàng (rất lớn) */
+.item-large {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+/* Ảnh cao: chiếm 1 cột, 2 hàng */
+.item-tall {
+    grid-row: span 2;
+}
+
+/* Ảnh rộng: chiếm 2 cột, 1 hàng */
+.item-wide {
+    grid-column: span 2;
+}
+
+/* --- Responsive cho màn hình nhỏ --- */
+@media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-auto-rows: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+    }
+    /* Gỡ bỏ span trên mobile để ảnh hiển thị dọc */
+    .item-large, .item-tall, .item-wide {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+    .gallery-item img {
+        height: auto;
+        aspect-ratio: 1/1;
+    }
+}

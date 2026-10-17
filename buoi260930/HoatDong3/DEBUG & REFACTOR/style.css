@@ -1,0 +1,338 @@
+/* Giữ CSS gốc để đối chiếu nhưng vô hiệu hóa toàn bộ quy tắc cũ. */
+@media not all {
+    /* ==============================
+       CSS CHƯA TỐI ƯU
+       ============================== */
+
+    body {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+
+        padding-top: 0px;
+        padding-bottom: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        font-weight: normal;
+        font-style: normal;
+
+        background-color: #f5f1e8;
+        color: #333333;
+    }
+
+    /* Header */
+    .header {
+        background-color: #5c4033;
+        color: white;
+        text-align: center;
+
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        margin-top: 0px;
+        margin-bottom: 30px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .header h1 {
+        margin-top: 0px;
+        margin-bottom: 10px;
+        margin-left: 0px;
+        margin-right: 0px;
+
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    .header p {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+
+        font-size: 16px;
+    }
+
+    /* Container */
+    .container {
+        width: 90%;
+        max-width: 1100px;
+
+        margin-top: 0px;
+        margin-bottom: 40px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Recipe */
+    .recipe {
+        background-color: white;
+        border: 1px solid #dddddd;
+        border-radius: 10px;
+
+        padding-top: 25px;
+        padding-bottom: 25px;
+        padding-left: 25px;
+        padding-right: 25px;
+
+        margin-top: 0px;
+        margin-bottom: 25px;
+        margin-left: 0px;
+        margin-right: 0px;
+
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .recipe h2 {
+        color: #5c4033;
+        margin-top: 0px;
+        margin-bottom: 15px;
+        margin-left: 0px;
+        margin-right: 0px;
+
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    /* Các class có thuộc tính giống nhau */
+    .info {
+        background-color: #f3eee5;
+        border-left: 4px solid #5c4033;
+
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+
+        margin-top: 10px;
+        margin-bottom: 20px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .ingredients {
+        background-color: #faf8f3;
+
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 35px;
+        padding-right: 15px;
+
+        margin-top: 10px;
+        margin-bottom: 20px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .steps {
+        background-color: #faf8f3;
+
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 35px;
+        padding-right: 15px;
+
+        margin-top: 10px;
+        margin-bottom: 20px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    /* Các heading có nhiều thuộc tính tương tự */
+    .recipe h3 {
+        color: #5c4033;
+
+        margin-top: 20px;
+        margin-bottom: 10px;
+        margin-left: 0px;
+        margin-right: 0px;
+
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    /* Class button */
+    .btn {
+        background-color: #5c4033;
+        color: white;
+
+        border-top: none;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
+
+        border-radius: 5px;
+
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        margin-top: 10px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+
+        font-size: 16px;
+        font-weight: normal;
+
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        background-color: #3f2b22;
+    }
+
+    /* Footer */
+    .footer {
+        background-color: #5c4033;
+        color: white;
+        text-align: center;
+
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .footer p {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            column-gap: 25px;
+        }
+
+        .recipe {
+            margin-top: 0px;
+            margin-bottom: 25px;
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+    }
+}
+
+/* Gom các giá trị nền và chữ dùng chung ở header/footer. */
+.header,
+.footer {
+    background-color: #5c4033;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Giữ khoảng đệm dọc riêng của header. */
+.header {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+/* Shorthand margin; font-size 32px vẫn giữ nguyên giao diện cũ. */
+.header h1 {
+    margin: 0 0 10px;
+    font-size: 32px;
+}
+
+/* Reset margin mặc định của các đoạn trong header/footer. */
+.header p,
+.footer p {
+    margin: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto 40px;
+}
+
+.recipe {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Bỏ font-weight bold vì đây là kiểu mặc định của heading. */
+.recipe h2 {
+    color: #5c4033;
+    margin: 0 0 15px;
+    font-size: 24px;
+}
+
+/* Các khối dùng chung khoảng cách; gộp ingredients và steps. */
+.info,
+.ingredients,
+.steps {
+    margin: 10px 0 20px;
+}
+
+.info {
+    background-color: #f3eee5;
+    border-left: 4px solid #5c4033;
+    padding: 10px 15px;
+}
+
+.ingredients,
+.steps {
+    background-color: #faf8f3;
+    padding: 15px 15px 15px 35px;
+}
+
+/* Bỏ font-weight bold vì đây là kiểu mặc định của heading. */
+.recipe h3 {
+    color: #5c4033;
+    margin: 20px 0 10px;
+    font-size: 18px;
+}
+
+.btn {
+    background-color: #5c4033;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #3f2b22;
+}
+
+/* Khoảng đệm footer dùng chung với header; margin mặc định bằng 0. */
+.footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 25px;
+    }
+}

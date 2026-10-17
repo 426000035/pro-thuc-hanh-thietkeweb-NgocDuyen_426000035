@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portfolio cá nhân của Nguyễn Ngọc Duyên, sinh viên thiết kế và phát triển web.">
+  <title>Nguyễn Ngọc Duyên | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="portfolio-layout">
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="Ngọc Duyên, về đầu trang">
+        <span class="brand-mark">ND</span>
+        <span>ngocduyen<span class="brand-dot">.</span></span>
+      </a>
+      <nav class="header-nav" aria-label="Điều hướng chính">
+        <a href="#about">Giới thiệu</a>
+        <a href="#projects">Dự án</a>
+        <a class="contact-link" href="mailto:duyen.nguyen@example.com">Liên hệ <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <aside class="profile-sidebar" id="about" aria-label="Thông tin cá nhân">
+      <div class="profile-photo-wrap">
+        <img class="profile-photo" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=720&q=85" alt="Chân dung Nguyễn Ngọc Duyên">
+        <span class="availability"><span></span> Sẵn sàng học hỏi</span>
+      </div>
+      <div class="profile-copy">
+        <p class="section-kicker">SINH VIÊN THIẾT KẾ WEB</p>
+        <h2>Nguyễn Ngọc<br>Duyên</h2>
+        <p class="profile-description">Mình yêu thích tạo nên những trải nghiệm số rõ ràng, hữu ích và có dấu ấn riêng.</p>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-detail">
+        <span class="detail-label">ĐANG HỌC</span>
+        <span>Thiết kế &amp; phát triển web</span>
+      </div>
+      <div class="sidebar-detail">
+        <span class="detail-label">ĐỊA ĐIỂM</span>
+        <span>Long Khánh, Việt Nam</span>
+      </div>
+      <div class="social-links" aria-label="Mạng xã hội">
+        <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+      </div>
+    </aside>
+
+    <main class="main-content" id="home">
+      <section class="intro-section" aria-labelledby="intro-title">
+        <p class="section-kicker"><span class="kicker-line"></span> PORTFOLIO CÁ NHÂN · 2026</p>
+        <h1 id="intro-title">Chào bạn,<br>mình là <span>Duyên.</span></h1>
+        <div class="intro-bottom">
+          <p>Mình đang học cách biến ý tưởng thành những trang web thân thiện, dễ dùng và đẹp mắt.</p>
+          <a class="text-link" href="#projects">Khám phá dự án <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
+
+      <section class="projects-section" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">ĐÃ THỰC HIỆN</p>
+            <h2 id="projects-title">Dự án chọn lọc</h2>
+          </div>
+          <span class="project-count">03 / 2026</span>
+        </div>
+        <div class="project-list">
+          <article class="project-item">
+            <a class="project-image" href="#contact" aria-label="Xem dự án Giao diện cửa hàng trực tuyến">
+              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1000&q=85" alt="Bàn làm việc với máy tính đang mở mã nguồn" loading="lazy">
+              <span class="project-number">01</span>
+              <span class="project-arrow" aria-hidden="true">↗</span>
+            </a>
+            <div class="project-info">
+              <div><h3>Giao diện cửa hàng trực tuyến</h3><p>Thiết kế giao diện · HTML · CSS</p></div>
+              <span class="project-year">2026</span>
+            </div>
+          </article>
+          <article class="project-item">
+            <a class="project-image" href="#contact" aria-label="Xem dự án Trang giới thiệu quán cà phê">
+              <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1000&q=85" alt="Không gian quán cà phê ấm cúng" loading="lazy">
+              <span class="project-number">02</span>
+              <span class="project-arrow" aria-hidden="true">↗</span>
+            </a>
+            <div class="project-info">
+              <div><h3>Trang giới thiệu quán cà phê</h3><p>Bố cục responsive · CSS Grid</p></div>
+              <span class="project-year">2026</span>
+            </div>
+          </article>
+          <article class="project-item">
+            <a class="project-image" href="#contact" aria-label="Xem dự án Bảng điều khiển học tập">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=85" alt="Biểu đồ phân tích trên màn hình máy tính" loading="lazy">
+              <span class="project-number">03</span>
+              <span class="project-arrow" aria-hidden="true">↗</span>
+            </a>
+            <div class="project-info">
+              <div><h3>Bảng điều khiển học tập</h3><p>UI concept · Figma</p></div>
+              <span class="project-year">2026</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact-strip" id="contact" aria-label="Liên hệ">
+        <p>Bạn có một ý tưởng thú vị?</p>
+        <a href="mailto:duyen.nguyen@example.com">Cùng trò chuyện <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>© 2026 Nguyễn Ngọc Duyên</span>
+      <span>Thiết kế với sự tò mò <span class="footer-spark" aria-hidden="true">✳</span></span>
+    </footer>
+  </div>
+</body>
+</html>

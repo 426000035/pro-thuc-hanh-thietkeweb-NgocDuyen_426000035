@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f7f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.pricing-container {
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.pricing-container h2 {
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    color: #333;
+}
+
+/* Sắp xếp 3 bảng giá ngang hàng bằng Flexbox */
+.pricing-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap; /* Rớt dòng khi màn hình nhỏ */
+}
+
+/* Thiết kế từng bảng giá */
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 30px 20px;
+    width: 300px;
+    /* Sử dụng flexbox cho nội dung bên trong card */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa các thành phần */
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin: 20px 0;
+}
+
+.price span {
+    font-size: 1rem;
+    color: #777;
+    font-weight: normal;
+}
+
+.card p {
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.card ul {
+    list-style: none;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.card ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    color: #555;
+}
+
+.card ul li:last-child {
+    border-bottom: none;
+}
+
+/* Đảm bảo nút mua ngay luôn nằm sát đáy bảng giá */
+.buy-btn {
+    margin-top: auto; /* Kéo nút xuống đáy nếu có khoảng trống */
+    padding: 12px 25px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.buy-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Hiệu ứng Hover vào bảng giá */
+.card:hover {
+    transform: scale(1.05); /* Phóng to nhẹ */
+    background-color: #007BFF; /* Thay đổi màu nền nổi bật */
+    color: white; /* Đổi màu chữ sang trắng */
+    box-shadow: 0 10px 25px rgba(0, 123, 255, 0.4);
+}
+
+.card:hover h3, 
+.card:hover .price, 
+.card:hover .price span,
+.card:hover p,
+.card:hover ul li {
+    color: white; /* Cập nhật toàn bộ chữ thành trắng khi hover */
+}
+
+.card:hover ul li {
+    border-bottom-color: rgba(255, 255, 255, 0.3);
+}
+
+.card:hover .buy-btn {
+    background-color: white;
+    color: #007BFF; /* Nút đảo màu khi thẻ được hover */
+}

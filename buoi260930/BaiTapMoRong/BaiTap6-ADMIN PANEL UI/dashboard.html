@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard quản trị</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+  <!-- Sidebar cố định bên trái -->
+  <aside class="sidebar">
+    <a href="#" class="brand">Quản<span>Trị</span></a>
+    <nav aria-label="Menu quản trị">
+      <ul class="nav-list">
+        <li><a href="#" class="active">Tổng quan</a></li>
+        <li><a href="#">Đơn hàng</a></li>
+        <li><a href="#">Sản phẩm</a></li>
+        <li><a href="#">Khách hàng</a></li>
+        <li><a href="#">Báo cáo</a></li>
+        <li><a href="#">Cài đặt</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">Admin · Đăng xuất</div>
+  </aside>
+
+  <!-- Vùng nội dung bên phải (cuộn được) -->
+  <main class="content">
+    <header class="page-head">
+      <h1>Tổng quan</h1>
+      <p>Số liệu cập nhật trong 30 ngày gần nhất</p>
+    </header>
+
+    <!-- 4 thẻ thống kê: CSS Grid -->
+    <section class="stats" aria-label="Thống kê nhanh">
+      <article class="card">
+        <h2>Doanh thu</h2>
+        <p class="value">128,4 triệu</p>
+        <p class="trend up">+12,5% so với tháng trước</p>
+      </article>
+      <article class="card">
+        <h2>Đơn hàng</h2>
+        <p class="value">1.284</p>
+        <p class="trend up">+8,2% so với tháng trước</p>
+      </article>
+      <article class="card">
+        <h2>Khách hàng mới</h2>
+        <p class="value">342</p>
+        <p class="trend down">−3,1% so với tháng trước</p>
+      </article>
+      <article class="card">
+        <h2>Tỷ lệ hoàn đơn</h2>
+        <p class="value">2,4%</p>
+        <p class="trend up">−0,6% so với tháng trước</p>
+      </article>
+    </section>
+
+    <!-- Bảng dữ liệu -->
+    <section class="table-box" aria-label="Đơn hàng gần đây">
+      <h2>Đơn hàng gần đây</h2>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Mã đơn</th>
+              <th>Khách hàng</th>
+              <th>Ngày đặt</th>
+              <th>Tổng tiền</th>
+              <th>Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>#DH1042</td><td>Nguyễn Minh Anh</td><td>28/09/2026</td><td>1.250.000đ</td><td><span class="badge done">Hoàn tất</span></td></tr>
+            <tr><td>#DH1041</td><td>Trần Quốc Bảo</td><td>28/09/2026</td><td>480.000đ</td><td><span class="badge ship">Đang giao</span></td></tr>
+            <tr><td>#DH1040</td><td>Lê Thu Hà</td><td>27/09/2026</td><td>2.180.000đ</td><td><span class="badge wait">Chờ xử lý</span></td></tr>
+            <tr><td>#DH1039</td><td>Phạm Gia Huy</td><td>27/09/2026</td><td>320.000đ</td><td><span class="badge done">Hoàn tất</span></td></tr>
+            <tr><td>#DH1038</td><td>Võ Ngọc Lan</td><td>26/09/2026</td><td>890.000đ</td><td><span class="badge cancel">Đã hủy</span></td></tr>
+            <tr><td>#DH1037</td><td>Đặng Hoàng Nam</td><td>26/09/2026</td><td>1.560.000đ</td><td><span class="badge ship">Đang giao</span></td></tr>
+            <tr><td>#DH1036</td><td>Bùi Thanh Tâm</td><td>25/09/2026</td><td>745.000đ</td><td><span class="badge done">Hoàn tất</span></td></tr>
+            <tr><td>#DH1035</td><td>Huỳnh Mỹ Linh</td><td>25/09/2026</td><td>2.900.000đ</td><td><span class="badge wait">Chờ xử lý</span></td></tr>
+            <tr><td>#DH1034</td><td>Ngô Đức Thịnh</td><td>24/09/2026</td><td>410.000đ</td><td><span class="badge done">Hoàn tất</span></td></tr>
+            <tr><td>#DH1033</td><td>Dương Khánh Vy</td><td>24/09/2026</td><td>1.075.000đ</td><td><span class="badge ship">Đang giao</span></td></tr>
+            <tr><td>#DH1032</td><td>Lý Tuấn Kiệt</td><td>23/09/2026</td><td>630.000đ</td><td><span class="badge done">Hoàn tất</span></td></tr>
+            <tr><td>#DH1031</td><td>Mai Phương Thảo</td><td>23/09/2026</td><td>1.990.000đ</td><td><span class="badge cancel">Đã hủy</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
